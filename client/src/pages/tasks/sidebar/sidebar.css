@@ -62,7 +62,7 @@
     background-color: rgb(38, 132, 255);
 }
 
-.arrow-button {
+.collapse-button {
     background-color: rgb(255, 255, 255);
     position: relative;
     top: 32px;
@@ -83,7 +83,7 @@
 
 }
 
-.arrow-button:hover {
+.collapse-button:hover {
     background-color: rgb(76, 154, 255);
     color: rgb(255, 255, 255);
 }
