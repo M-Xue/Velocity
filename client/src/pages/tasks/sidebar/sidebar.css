@@ -3,14 +3,24 @@
     height: calc(100vh - 56px);
     display: flex;
     /* position: fixed; */
+
+    position: relative;
+
+
+
 }
 
+
+
 .sidebar-content {
-    background-color: #FAFBFC;
-    width: 240px;
+    width: calc(100% - 27px);
+    /* width: 240px; */
     height: 100%;
     display: flex;
     flex-direction: column;
+
+    background-color: #FAFBFC;
+
 
     /* position: absolute;
     outline: currentcolor none medium; */
@@ -20,7 +30,43 @@
 
 .sidebar-resize-container {
     display: flex;
+
+    height: 100%;
+
+    position: absolute;
+    right: 0;
+    top: 0;
+    z-index: 99;
+
 }
+
+
+
+/* .resizable {
+    position: relative;
+} */
+
+/* Placed at the right side */
+/* All resizers are positioned absolutely inside the element */
+
+/* .resizer-right {
+    position: absolute;
+    cursor: col-resize;
+    height: 100%;
+    right: 0;
+    top: 0;
+    width: 5px;
+}
+ */
+
+
+
+
+
+
+
+
+
 
 
 .sidebar-border {
@@ -55,12 +101,55 @@
     transition: background-color 200ms ease 0s;
     width: 2px;
     position: relative;
-    left: -2.5px;
+    left: -2px;
 }
 
 .sidebar-resize-button:hover span, .sidebar-resize-button span:hover {
     background-color: rgb(38, 132, 255);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 .collapse-button {
     background-color: rgb(255, 255, 255);
@@ -87,3 +176,8 @@
     background-color: rgb(76, 154, 255);
     color: rgb(255, 255, 255);
 }
+
+
+
+
+

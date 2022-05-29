@@ -9,6 +9,8 @@
     color: #344563;
     position: relative;
     height: 56px;
+
+    z-index: 999;
 }
 
 .navbar::after {
@@ -65,8 +67,7 @@
 
     display: flex;
     align-items: center;
-    
-    font-weight: 500;
+        
     font-size: 14px;
 
     transition: background 0.1s ease-out 0s, box-shadow 0.15s cubic-bezier(0.47, 0.03, 0.49, 1.38) 0s;
