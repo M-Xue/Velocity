@@ -1,9 +1,9 @@
 .sidebar-container {
     height: calc(100vh - 56px);
     position: fixed;
+    min-width: 240px;
+    max-width: 50%;
 }
-
-
 
 .sidebar-content {
     min-width: 240px;
@@ -12,8 +12,6 @@
     background-color: #FAFBFC;
     height: 100%;
 }
-
-
 
 .sidebar-resize-container {
     display: flex;
@@ -39,27 +37,23 @@
     background: rgba(0, 0, 0, 0) linear-gradient(to left, rgba(0, 0, 0, 0.2) 0px, rgba(0, 0, 0, 0.2) 1px, rgba(0, 0, 0, 0.1) 1px, rgba(0, 0, 0, 0) 100%) repeat scroll 0% 0%;
     opacity: 0.5;
 
-    /* bottom: 0px;
+    bottom: 0px;
     top: 0px;
-    left: -1px;
+    left: -3px;
     pointer-events: none;
-    position: absolute; */
+    position: absolute;
 
-
-    /* transition-duration: 0.22s;
+    transition-duration: 0.22s;
     transition-property: left, opacity, width;
-    transition-timing-function: cubic-bezier(0.2, 0, 0, 1); */
+    transition-timing-function: cubic-bezier(0.2, 0, 0, 1);
     width: 3px;
-
-
 }
 
-
-/* .sidebar-resize-container:active > .sidebar-border {
-    opacity: 0.8;
-    width: 6px;
-
-} */
+.sidebar-resize-container:active > .sidebar-border {
+    opacity: 1;
+    width: 8px;
+    left: -8px;
+}
 
 
 .sidebar-resize-button {
@@ -91,6 +85,8 @@
 .sidebar-resize-button:hover span, .sidebar-resize-button span:hover {
     background-color: rgb(38, 132, 255);
 }
+
+
 
 /* .sidebar-resize-container:active > span {
     background-color: rgb(38, 132, 255);
