@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useRef, useState, useEffect } from 'react'
 import './sidebar.css'
 
 import styled from 'styled-components';
@@ -17,17 +17,37 @@ const SidebarBorderSpan = styled.span`
 `
 
 
-
 export default function Sidebar() {
+  
+
+  const originalSidebarWidth = useRef<number>(240) // Need to make this based on local storage
 
 
-  const originalSidebarWidth = useRef<number>(267) // Need to make this based on local storage
-
-  const [sidebarWidth, setsidebarWidth] = useState<number>(originalSidebarWidth.current);
+  const [sidebarWidth, setSidebarWidth] = useState<number>(originalSidebarWidth.current);
 
   const originalMousePositionX = useRef<number>(sidebarWidth)
   const isResizeActive = useRef<boolean>(false) 
-  const [isResizeActiveState, setIsResizeActiveState] = useState<boolean>(false)
+  const [isResizeActiveState, setIsResizeActiveState] = useState<boolean>(false) // ! This is not a good React patten. Try to replace this when a better method comes up.
+
+  
+
+  // This makes it so that when the window is resized and the 50% max-width measurement changes, the width of the sidebar is automatically clipped.
+  useEffect(() => {
+
+    const windowResizeHandler = (e: any) => {
+      if (sidebarWidth > document.documentElement.clientWidth/2) {
+        setSidebarWidth(document.documentElement.clientWidth/2);
+      }
+    }
+
+    window.addEventListener('resize', windowResizeHandler);
+  
+    return () => {
+      window.removeEventListener('resize', windowResizeHandler);
+    }
+  }, [sidebarWidth])
+  
+
 
 
   const resizeMouseDownHandler = (e: any) => {
@@ -42,9 +62,15 @@ export default function Sidebar() {
   }
   
   const resizeMouseMoveHandler = (e: any) => {
+
     const mouseMovementX = e.clientX - originalMousePositionX.current;
     const newWidth = sidebarWidth + mouseMovementX;
-    setsidebarWidth(newWidth)
+
+    if (newWidth <= document.documentElement.clientWidth/2 && newWidth >= 240) {
+      setSidebarWidth(newWidth)
+    }
+
+    
   }
 
   const resizeMouseUpHandler = (e:any) => {
@@ -157,7 +183,7 @@ export default function Sidebar() {
   //   // const originalSidebarWidth = useRef(267) // Need to make this based on local storage
   
   //   const [originalSidebarWidth, setOriginalSidebarWidth] = useState(267) // Need to make this based on local storage
-  //   const [sidebarWidth, setsidebarWidth] = useState(originalSidebarWidth);
+  //   const [sidebarWidth, setSidebarWidth] = useState(originalSidebarWidth);
   
   //   const [originalMousePositionX, setOriginalMousePositionX] = useState(sidebarWidth)
     
@@ -188,7 +214,7 @@ export default function Sidebar() {
   //     if (originalMousePositionX) {
   //       const mouseMovementX = e.clientX - originalMousePositionX;
   //       const newWidth = originalSidebarWidth + mouseMovementX;
-  //       setsidebarWidth(newWidth)
+  //       setSidebarWidth(newWidth)
   //       console.log(sidebarWidth);
   
   //     }
