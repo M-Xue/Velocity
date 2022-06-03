@@ -1,5 +1,6 @@
 import React from 'react'
 import Sidebar from '../../components/sidebar/Sidebar'
+import Board from './board/Board'
 import './tasks.css'
 
 
@@ -25,9 +26,8 @@ export default function Tasks() {
   return (
     <div className='task-page-container'>
       <Sidebar/>
-      {/* <div>gagg</div>
-      <Button onClick={()=>alert('Working')}>Test</Button> */}
-
+      <Board/>
+      dfhdfhfdfdsgdsfgdgdfgdfgdfgxdsfgdszfgfzdg
 
     </div>
   )
