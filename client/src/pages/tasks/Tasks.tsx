@@ -20,15 +20,10 @@ export default function Tasks() {
 
 
 
-
-
-
   return (
     <div className='task-page-container'>
-      <Sidebar/>
-      <Board/>
-      dfhdfhfdfdsgdsfgdgdfgdfgdfgxdsfgdszfgfzdg
-
+      <Sidebar />
+      <Board />
     </div>
   )
 }
