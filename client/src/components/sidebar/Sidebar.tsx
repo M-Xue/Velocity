@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const SidebarContainer = styled.div.attrs((props: any) => ({
   style: {
-    width: props.sidebarWidth,
+    minWidth: props.sidebarWidth,
   }
 }))` 
   
@@ -85,8 +85,8 @@ export default function Sidebar() {
     originalSidebarWidth.current = sidebarWidth;
     document.body.style.cursor = "default"; 
 
-    window.removeEventListener('mousemove', throttleResizeMouseMoveHandler);
-    window.removeEventListener('mouseup', resizeMouseUpHandler); // * To revert throttle changes replace 'throttleResizeMouseMoveHandler' with 'resizeMouseMoveHandler'.
+    window.removeEventListener('mousemove', throttleResizeMouseMoveHandler); // * To revert throttle changes replace 'throttleResizeMouseMoveHandler' with 'resizeMouseMoveHandler'.
+    window.removeEventListener('mouseup', resizeMouseUpHandler); 
 
     isResizeActive.current = false; 
     setIsResizeActiveState(prev => !prev) // This is to change the background color of the border when the user lets go of resizing the sidebar
