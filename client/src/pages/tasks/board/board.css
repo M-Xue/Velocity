@@ -13,41 +13,7 @@
 }
 
 
-
-
-.outer {
-    /* width: 500px; */
-    width: 100%;
-    height: calc(100% - 56px);
-    white-space: nowrap;
-    position: relative;
-    overflow-x: scroll;
-    overflow-y: hidden;
-    -webkit-overflow-scrolling: touch;
-
-    padding-left: 45px;
-    /* padding-right: 50px; */
-}
-  
-.outer div {
-    /* width: 15%;
-    min-width: 200px; */
-    width: 250px;
-    background-color: #eee;
-    float: none;
-    height: 90%;
-    margin: 0 8px;
-    display: inline-block;
-    zoom: 1;
-}
-
-
-
-
-
-
-
-/* Board Topbar Styling */
+/** Board Topbar Styling ***********************************************************************************/
 .board-navbar {
     height: 56px;
     display: flex;
@@ -86,3 +52,36 @@
 .board-list-toggle-button {
     padding: 6px 13.5px;
 }
+
+
+/** Kaban Board Styling ************************************************************************************/
+.board-columns {
+    /* width: 500px; */
+    width: 100%;
+    height: calc(100% - 56px);
+    white-space: nowrap;
+    position: relative;
+    overflow-x: scroll;
+    overflow-y: hidden;
+    -webkit-overflow-scrolling: touch;
+
+    padding-left: 45px;
+    /* padding-right: 50px; */
+}
+  
+.board-column {
+    /* width: 15%;
+    min-width: 200px; */
+    box-sizing: border-box;
+    width: 250px;
+    background-color: #F4F5F7;
+    border: black 1px solid;
+    float: none;
+    height: 90%; /* Get rid of this later since the height will dynamically change as you add more elements */
+    margin: 0 8px;
+    display: inline-block;
+}
+
+
+
+

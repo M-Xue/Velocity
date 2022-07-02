@@ -36,13 +36,13 @@ export default function Board() {
         </ul>
       </nav>
 
-      <div className='outer'>
-        <div>item 1</div>
-        <div>item 2</div>
-        <div>item 3</div>
-        <div>item 4</div>
-        <div>item 5</div>
-        <div>item 6</div>
+      <div className='board-columns'>
+        <div className='board-column backlog-column'>item 1</div>
+        <div className='board-column todo-column'>item 2</div>
+        <div className='board-column in-progress-column'>item 3</div>
+        <div className='board-column in-review-column'>item 4</div>
+        <div className='board-column done-column'>item 5</div>
+        <div className='board-column cancelled-column'>item 6</div>
       </div>
     </div>
       
