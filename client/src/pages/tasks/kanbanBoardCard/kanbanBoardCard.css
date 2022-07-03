@@ -1,0 +1,27 @@
+.kanban-card {
+    box-shadow: rgb(15 15 15 / 10%) 0px 0px 0px 1px, rgb(15 15 15 / 10%) 0px 2px 4px;
+    border-radius: 3px;
+    background-color: white;
+    
+    box-sizing: border-box;
+    margin-bottom: 5px;
+    padding: 7px 15px;
+    width: 100%;
+}
+
+.kcard-top {
+    display: flex;
+    justify-content: space-between;
+}
+
+.kcard-bottom {
+    display: flex;
+    justify-content: space-between;
+}
+
+.kcard-tags {
+    display: flex;
+}
+.kcard-tag {
+    margin-right: 5px;
+}

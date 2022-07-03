@@ -3,6 +3,7 @@ import './board.css'
 import _ from 'lodash';
 
 import styled from 'styled-components';
+import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
 
 
 
@@ -18,6 +19,9 @@ export default function Board() {
 
   return (
     <div className='board-container'>
+
+
+
       <nav className='board-navbar'>
         <ul>
           <li><div className='board-list-toggle-button'><span>List</span></div></li>
@@ -36,18 +40,45 @@ export default function Board() {
         </ul>
       </nav>
 
+
+
       <div className='board-columns'>
-        <div className='board-column backlog-column'>item 1</div>
-        <div className='board-column todo-column'>item 2</div>
-        <div className='board-column in-progress-column'>item 3</div>
-        <div className='board-column in-review-column'>item 4</div>
-        <div className='board-column done-column'>item 5</div>
-        <div className='board-column cancelled-column'>item 6</div>
+
+
+
+
+        <div className='board-column backlog-column'>
+          <div className="kaban-board-heading">Backlog</div>
+          <KanbanBoardCard/>
+          <KanbanBoardCard/>
+        </div>
+        <div className='board-column todo-column'>
+          <div className="kaban-board-heading">To Do</div>
+
+        </div>
+        <div className='board-column in-progress-column'>
+          <div className="kaban-board-heading">In Progress</div>
+
+        </div>
+        <div className='board-column in-review-column'>
+          <div className="kaban-board-heading">In Review</div>
+
+        </div>
+        <div className='board-column done-column'>
+          <div className="kaban-board-heading">Done</div>
+
+        </div>
+        <div className='board-column cancelled-column'>
+          <div className="kaban-board-heading">Cancelled</div>
+
+        </div>
+
+
       </div>
+
+
+
     </div>
-      
-
-
   )
 }
 
