@@ -5,16 +5,77 @@ import _ from 'lodash';
 import styled from 'styled-components';
 import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
 
+import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
+const cardDummyData = {
+  backlog: [
+    {
+      id: '1',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      cardTitle: 'Test',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },
+    {
+      id: '2',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      cardTitle: 'Test',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    }
+  ],
+  todo: [],
+  inPogress: [],
+  inReview: [],
+  done: [],
+  cancelled: []
+}
+
+
+// const lists = ['backlog', 'todo', 'inPogress', 'inReview', 'done', 'cancelled'];
+
+// Removes and element from a given list from the given index and returns both the new list and the removed element
+const removeFromList = (list: any, index: any) => {  
+  const result = Array.from(list);  
+  const [removed] = result.splice(index, 1);  
+  return [removed, result];
+}
+
+// Returns a new list that is a copy of the given list with the given element inserted at the given index
+const addToList = (list: any, index: any, element: any) => {  
+  const result = Array.from(list);  
+  result.splice(index, 0, element);  
+  return result;
+}
 
 
 
 export default function Board() {
 
+  const [board, setBoard] = useState<any>(cardDummyData);
 
 
-
-
+  const onDragEnd = (result: any) => {  
+    if (!result.destination) {  
+        return;  
+    }  
+    const listCopy = { ...board }  
+  
+    const sourceList = listCopy[result.source.droppableId] // result.source.droppableId is the key of the key value pair of the list in the elements state object that the draggable was taken from
+    const [removedElement, newSourceList] = removeFromList(sourceList, result.source.index)  
+    listCopy[result.source.droppableId] = newSourceList  
+  
+    const destinationList = listCopy[result.destination.droppableId]  
+    // removedElement.listId = result.destination.droppableId; //* CHANGED THIS SO THAT THE ELEMENTS LIST ID IS DYNAMICALLY UPDATED. 
+    listCopy[result.destination.droppableId] = addToList(destinationList, result.destination.index, removedElement)
+    // console.log(destinationList);
+    // console.log(removedElement);
+    setBoard(listCopy)
+  }
 
 
   return (
@@ -41,42 +102,56 @@ export default function Board() {
       </nav>
 
 
+      <DragDropContext onDragEnd={onDragEnd}>
+        <div className='board-columns'>
+          {Object.keys(board).map((list, index) => (
+            <Droppable droppableId={list} key={index}>
+              {(provided: any, snapshot: any) => (
+                <div 
+                  className='board-column'
+                  ref={provided.innerRef}
+                  {...provided.droppableProps}
+                >
+                  {board[list].map((card: any, index: any) => (
+                    <Draggable key={card.id} draggableId={card.id} index={index}>
+                      {(provided: any) => (
+                        <div
+                          ref={provided.innerRef}
+                          {...provided.draggableProps}
+                          {...provided.dragHandleProps}
+                        >
+                          <KanbanBoardCard
+                            id={card.id}
+                            listId={card.listId}
+                            priority={card.priority}
+                            project={card.project}
+                            title={card.title}
+                            tags={card.tags}
+                            deadline={card.deadline}
+                          />
 
-      <div className='board-columns'>
-
-
-
-
-        <div className='board-column backlog-column'>
-          <div className="kaban-board-heading">Backlog</div>
-          <KanbanBoardCard/>
-          <KanbanBoardCard/>
+                        </div>
+                      )}
+                    </Draggable>
+                  ))}
+                  {provided.placeholder}
+                </div>
+              )}
+            </Droppable>
+          ))}
         </div>
-        <div className='board-column todo-column'>
-          <div className="kaban-board-heading">To Do</div>
-
-        </div>
-        <div className='board-column in-progress-column'>
-          <div className="kaban-board-heading">In Progress</div>
-
-        </div>
-        <div className='board-column in-review-column'>
-          <div className="kaban-board-heading">In Review</div>
-
-        </div>
-        <div className='board-column done-column'>
-          <div className="kaban-board-heading">Done</div>
-
-        </div>
-        <div className='board-column cancelled-column'>
-          <div className="kaban-board-heading">Cancelled</div>
-
-        </div>
+      </DragDropContext>
 
 
-      </div>
-
-
+                    {/* <KanbanBoardCard
+                      id={card.id}
+                      listId={card.listId}
+                      priority={card.priority}
+                      project={card.priority}
+                      title={card.title}
+                      tags={card.tags}
+                      deadline={card.deadline}
+                    /> */}
 
     </div>
   )
@@ -85,6 +160,83 @@ export default function Board() {
 
 
 
+// <div className="kaban-board-heading">Backlog</div>
+//                   {board[list].map((card: any, index: any) => (
+//                     <Draggable key={card.id} draggableId={card.id} index={index}>
+//                       {(provided: any) => (
+//                         <div
+//                           ref={provided.innerRef}
+//                           {...provided.draggableProps}
+//                           {...provided.dragHandleProps}
+//                         >
+//                           <KanbanBoardCard
+//                             id={card.id}
+//                             listId={card.listId}
+//                             priority={card.priority}
+//                             project={card.priority}
+//                             title={card.title}
+//                             tags={card.tags}
+//                             deadline={card.deadline}
+//                           />
+//                         </div>
+//                       )}   
+//                     </Draggable>
+//                   ))} 
+
+
+
+
+
+{/* <div className='board-columns'>
+
+
+
+
+<div className='board-column backlog-column'>
+  <div className="kaban-board-heading">Backlog</div>
+  <KanbanBoardCard/>
+  <KanbanBoardCard/>
+</div>
+
+
+
+
+<div className='board-column todo-column'>
+  <div className="kaban-board-heading">To Do</div>
+
+</div>
+
+
+
+<div className='board-column in-progress-column'>
+  <div className="kaban-board-heading">In Progress</div>
+
+</div>
+
+
+
+<div className='board-column in-review-column'>
+  <div className="kaban-board-heading">In Review</div>
+
+</div>
+
+
+
+<div className='board-column done-column'>
+  <div className="kaban-board-heading">Done</div>
+
+</div>
+
+
+
+<div className='board-column cancelled-column'>
+  <div className="kaban-board-heading">Cancelled</div>
+
+</div>
+
+
+
+</div> */}
 
 
 
@@ -110,14 +262,7 @@ export default function Board() {
 
 
 
-
-
-
-
-
-
-
-
+//********************************************************************************************************************************************************************************* */
 
 
 
