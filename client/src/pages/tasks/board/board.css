@@ -69,6 +69,7 @@
     /* padding-right: 50px; */
 
     display: flex;
+
 }
   
 .board-column {
@@ -94,10 +95,24 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    background-color: antiquewhite;
+
+
+}
+
+.board-droppable-area {
+    /* background-color: antiquewhite; */
+    height: 100%;
+    width: 100%;
+
 }
 
 
 .kaban-board-heading {
     margin-bottom: 20px;
     width: 100%;
+}
+
+.kaban-card-padding {
+    padding-bottom: 5px;
 }

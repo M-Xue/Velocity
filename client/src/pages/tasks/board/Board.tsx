@@ -8,31 +8,112 @@ import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
 const cardDummyData = {
-  backlog: [
+  "Backlog": [
     {
       id: '1',
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      cardTitle: 'Test',
+      title: 'Test1',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },
     {
-      id: '2',
+      id: '10',
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      cardTitle: 'Test',
+      title: 'Test1',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '3',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test1',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '4',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test1',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '5',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test1',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '6',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test1',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '7',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test1',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '8',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test1',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '9',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test1',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '11',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test1',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '12',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test1',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     }
+    
   ],
-  todo: [],
-  inPogress: [],
-  inReview: [],
-  done: [],
-  cancelled: []
+  "To Do": [{
+    id: '2',
+    listId: 'backlog',
+    priority: 'High',
+    project: 'Velocity',
+    title: 'Test2',
+    tags: ['UI', "Backend"],
+    deadline: '15 Jun 2022'
+  }],
+  "In Pogress": [],
+  "In Review": [],
+  "Done": [],
+  "Cancelled": []
 }
 
 
@@ -60,6 +141,7 @@ export default function Board() {
 
 
   const onDragEnd = (result: any) => {  
+    console.log(result)
     if (!result.destination) {  
         return;  
     }  
@@ -105,54 +187,49 @@ export default function Board() {
       <DragDropContext onDragEnd={onDragEnd}>
         <div className='board-columns'>
           {Object.keys(board).map((list, index) => (
-            <Droppable droppableId={list} key={index}>
-              {(provided: any, snapshot: any) => (
-                <div 
-                  className='board-column'
-                  ref={provided.innerRef}
-                  {...provided.droppableProps}
-                >
-                  {board[list].map((card: any, index: any) => (
-                    <Draggable key={card.id} draggableId={card.id} index={index}>
-                      {(provided: any) => (
-                        <div
-                          ref={provided.innerRef}
-                          {...provided.draggableProps}
-                          {...provided.dragHandleProps}
-                        >
-                          <KanbanBoardCard
-                            id={card.id}
-                            listId={card.listId}
-                            priority={card.priority}
-                            project={card.project}
-                            title={card.title}
-                            tags={card.tags}
-                            deadline={card.deadline}
-                          />
+            <div className="board-column" key={index}>
+              <div className="kaban-board-heading">{list}</div>
+              <Droppable droppableId={list} >
+                {(provided: any, snapshot: any) => (
+                  <div 
+                    className='board-droppable-area'
+                    ref={provided.innerRef}
+                    {...provided.droppableProps}
+                  >
+                    {board[list].map((card: any, index: any) => (
+                      <Draggable key={card.id} draggableId={card.id} index={index}>
+                        {(provided: any) => (
+                          <div
+                            ref={provided.innerRef}
+                            {...provided.draggableProps}
+                            {...provided.dragHandleProps}
+                          >
+                            <div className="kaban-card-padding">
+                              <KanbanBoardCard
+                                id={card.id}
+                                listId={card.listId}
+                                priority={card.priority}
+                                project={card.project}
+                                title={card.title}
+                                tags={card.tags}
+                                deadline={card.deadline}
+                              />
+                            </div>
+                          </div>
+                        )}
+                      </Draggable>
+                    ))}
+                    {provided.placeholder}
+                  </div>
+                )}
+              </Droppable>
 
-                        </div>
-                      )}
-                    </Draggable>
-                  ))}
-                  {provided.placeholder}
-                </div>
-              )}
-            </Droppable>
+            </div>
+
+            
           ))}
         </div>
       </DragDropContext>
-
-
-                    {/* <KanbanBoardCard
-                      id={card.id}
-                      listId={card.listId}
-                      priority={card.priority}
-                      project={card.priority}
-                      title={card.title}
-                      tags={card.tags}
-                      deadline={card.deadline}
-                    /> */}
-
     </div>
   )
 }
