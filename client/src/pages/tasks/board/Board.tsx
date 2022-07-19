@@ -23,7 +23,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test2',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },{
@@ -31,7 +31,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test3',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },{
@@ -39,7 +39,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test4',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },{
@@ -47,7 +47,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test5',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },{
@@ -55,7 +55,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test6',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },{
@@ -63,7 +63,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test7',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },{
@@ -71,7 +71,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test8',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },{
@@ -79,7 +79,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test9',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },{
@@ -87,7 +87,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test11',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     },{
@@ -95,7 +95,7 @@ const cardDummyData = {
       listId: 'backlog',
       priority: 'High',
       project: 'Velocity',
-      title: 'Test1',
+      title: 'Test12',
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     }
@@ -189,7 +189,7 @@ export default function Board() {
           {Object.keys(board).map((list, index) => (
             <div className="board-column" key={index}>
               <div className="kaban-board-heading">{list}</div>
-              <Droppable droppableId={list} >
+              <Droppable droppableId={list}>
                 {(provided: any, snapshot: any) => (
                   <div 
                     className='board-droppable-area'
@@ -203,8 +203,9 @@ export default function Board() {
                             ref={provided.innerRef}
                             {...provided.draggableProps}
                             {...provided.dragHandleProps}
+
+                            className="kaban-card-container"
                           >
-                            <div className="kaban-card-padding">
                               <KanbanBoardCard
                                 id={card.id}
                                 listId={card.listId}
@@ -214,7 +215,6 @@ export default function Board() {
                                 tags={card.tags}
                                 deadline={card.deadline}
                               />
-                            </div>
                           </div>
                         )}
                       </Draggable>
