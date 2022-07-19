@@ -226,7 +226,7 @@ export default function Board() {
 
 
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className='board-columns'>
+        <div className='board-columns'> {/* If you want the react-dnd-board to be scrollable, the container outside the Droppables need to be scrollable. */}
           {Object.keys(board).map((list, index) => (
             <div className="board-column" key={index}>
               <div className="kaban-board-heading">{list}</div>
