@@ -227,48 +227,54 @@ export default function Board() {
 
       <DragDropContext onDragEnd={onDragEnd}>
         <div className='board-columns'> {/* If you want the react-dnd-board to be scrollable, the container outside the Droppables need to be scrollable. */}
-          {Object.keys(board).map((list, index) => (
-            <div className="board-column" key={index}>
-              <div className="kaban-board-heading">{list}</div>
-              <Droppable droppableId={list}>
-                {(provided: any, snapshot: any) => (
-                  <div 
-                    className='board-droppable-area'
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    {board[list].map((card: any, index: any) => (
-                      <Draggable key={card.id} draggableId={card.id} index={index}>
-                        {(provided: any) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
+          <div className="board-columns-wrapper">
 
-                            className="kaban-card-container"
-                          >
-                              <KanbanBoardCard
-                                id={card.id}
-                                listId={card.listId}
-                                priority={card.priority}
-                                project={card.project}
-                                title={card.title}
-                                tags={card.tags}
-                                deadline={card.deadline}
-                              />
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
+            {/* ************************************************************************************* */}
+            {Object.keys(board).map((list, index) => (
+              <div className="board-column" key={index}>
+                <div className="kaban-board-heading">{list}</div>
+                <Droppable droppableId={list}>
+                  {(provided: any, snapshot: any) => (
+                    <div 
+                      className='board-droppable-area'
+                      ref={provided.innerRef}
+                      {...provided.droppableProps}
+                    >
+                      {board[list].map((card: any, index: any) => (
+                        <Draggable key={card.id} draggableId={card.id} index={index}>
+                          {(provided: any) => (
+                            <div
+                              ref={provided.innerRef}
+                              {...provided.draggableProps}
+                              {...provided.dragHandleProps}
 
-            </div>
+                              className="kaban-card-container"
+                            >
+                                <KanbanBoardCard
+                                  id={card.id}
+                                  listId={card.listId}
+                                  priority={card.priority}
+                                  project={card.project}
+                                  title={card.title}
+                                  tags={card.tags}
+                                  deadline={card.deadline}
+                                />
+                            </div>
+                          )}
+                        </Draggable>
+                      ))}
+                      {provided.placeholder}
+                    </div>
+                  )}
+                </Droppable>
 
-            
-          ))}
+              </div>
+
+              
+            ))}
+            {/* ************************************************************************************* */}
+          </div>
+
         </div>
       </DragDropContext>
     </div>
