@@ -232,7 +232,10 @@ export default function Board() {
             {/* ************************************************************************************* */}
             {Object.keys(board).map((list, index) => (
               <div className="board-column" key={index}>
-                <div className="kaban-board-heading">{list}</div>
+                <div className="kaban-board-heading">
+                  {list}
+                  <div className="add-card-button">+</div>
+                </div>
                 <Droppable droppableId={list}>
                   {(provided: any, snapshot: any) => (
                     <div 
