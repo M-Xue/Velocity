@@ -58,9 +58,10 @@
 .kaban-board-heading {
     margin-bottom: 20px;
     width: 100%;
-    /* position: absolute; */
     display: flex;
     justify-content: space-between;
+    position: sticky;
+    top: 0;
 }
 
 .board-columns {
