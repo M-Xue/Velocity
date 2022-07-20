@@ -177,6 +177,39 @@ const addToList = (list: any, index: any, element: any) => {
 
 
 export default function Board() {
+  
+  //* STICKY TITLE ***********************/
+  //? Source: https://stackoverflow.com/questions/16302483/event-to-detect-when-positionsticky-is-triggered
+  const [isSticky, setIsSticky] = useState(false)
+  const stickyColumnName = useRef<any>()
+  
+  // mount 
+  useEffect(()=>{
+    const cachedRef = stickyColumnName.current,
+          observer = new IntersectionObserver(
+            ([e]) => setIsSticky(e.intersectionRatio < 1),
+            {
+              threshold: [1],
+              // rootMargin: '-1px 0px 0px 0px',  // alternativly, use this and set `top:0` in the CSS
+            }
+          )
+
+    observer.observe(cachedRef)
+    
+    // unmount
+    return function(){
+      observer.unobserve(cachedRef)
+    }
+  }, [])
+  //**************************************/
+
+
+
+
+
+
+
+
 
   const [board, setBoard] = useState<any>(cardDummyData);
 
@@ -232,7 +265,7 @@ export default function Board() {
             {/* ************************************************************************************* */}
             {Object.keys(board).map((list, index) => (
               <div className="board-column" key={index}>
-                <div className="kaban-board-heading">
+                <div className={"kaban-board-heading" + (isSticky ? " isSticky" : "")} ref={stickyColumnName}>
                   {list}
                   <div className="add-card-button">+</div>
                 </div>
