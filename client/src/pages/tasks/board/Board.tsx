@@ -180,6 +180,8 @@ export default function Board() {
   
   //* STICKY TITLE ***********************/
   //? Source: https://stackoverflow.com/questions/16302483/event-to-detect-when-positionsticky-is-triggered
+  // TODO NEED TO WATCH THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! https://www.youtube.com/watch?v=2IbRtjez6ag&list=PLVUo-YVOlgZPvqvoi3ilabhV5OX-c7ezh&index=4&t=184s&ab_channel=WebDevSimplified 
+  // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
   const [isSticky, setIsSticky] = useState(false)
   const stickyColumnName = useRef<any>()
   
@@ -262,8 +264,6 @@ export default function Board() {
         <div className='board-columns'> {/* If you want the react-dnd-board to be scrollable, the container outside the Droppables need to be scrollable. */}
             
           <div className="board-area">
-            {//* added this board heading *********************************************************************** */
-            }
             <div className={"kaban-board-headings-container" + (isSticky ? " isSticky" : "")} ref={stickyColumnName}>
               {Object.keys(board).map((list, index) => (
                 <div className="kaban-board-heading" >
@@ -272,25 +272,10 @@ export default function Board() {
                 </div>
               ))}
             </div>
-            {//************************************************************************ */
-            }
 
             <div className="board-columns-wrapper">
-
-              
-
               {Object.keys(board).map((list, index) => (
                 <div className="board-column" key={index}>
-                  {//* commented out this board heading *********************************************************************** */
-                  }
-                  {/* <div className={"kaban-board-heading" + (isSticky ? " isSticky" : "")} ref={stickyColumnName}>
-                    {list}
-                    <div className="add-card-button">+</div>
-                  </div> */}
-                  {//************************************************************************ */
-                  }
-
-
                   <Droppable droppableId={list}>
                     {(provided: any, snapshot: any) => (
                       <div 

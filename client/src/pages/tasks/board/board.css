@@ -106,7 +106,7 @@
 
 /* The purpose of this wrapper is so that we have a container that contains all columns but is also a child of another container that has overflow-x and overflow-y set to scroll. This lets us scroll through kanban board when we have too many cards/columns to fit the available space for the board.  */
 .board-columns-wrapper {
-    min-height: 100%;
+    min-height: calc(100% - 43px); 
     height: fit-content;
     display: flex;
 }
@@ -132,7 +132,7 @@
 
 .board-droppable-area {
     /* ***** */
-    min-height: calc(100% - 41px); /* The 41px is to account for the space that the kanban-board-heading takes up.  */
+    min-height: 100%; /* The 41px is to account for the space that the kanban-board-heading takes up.  */
     height: fit-content;
     /* ***** */
     width: 100%;
