@@ -72,9 +72,9 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    /* position: sticky;
-    top: -1px;
-    background-color: white; */
+    /* position: sticky; */
+    /* top: -1px; */
+    /* background-color: white;  */
 }
 
 .isSticky::after {
