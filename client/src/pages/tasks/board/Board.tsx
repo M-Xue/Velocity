@@ -99,6 +99,47 @@ const cardDummyData = {
       tags: ['UI', "Backend"],
       deadline: '15 Jun 2022'
     }
+    ,{
+      id: '13',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test13',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '14',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test14',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '15',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test15',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '16',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test16',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    },{
+      id: '17',
+      listId: 'backlog',
+      priority: 'High',
+      project: 'Velocity',
+      title: 'Test17',
+      tags: ['UI', "Backend"],
+      deadline: '15 Jun 2022'
+    }
     
   ],
   "To Do": [{
@@ -116,9 +157,6 @@ const cardDummyData = {
   "Cancelled": []
 }
 
-
-// const lists = ['backlog', 'todo', 'inPogress', 'inReview', 'done', 'cancelled'];
-
 // Removes and element from a given list from the given index and returns both the new list and the removed element
 const removeFromList = (list: any, index: any) => {  
   const result = Array.from(list);  
@@ -133,9 +171,35 @@ const addToList = (list: any, index: any, element: any) => {
   return result;
 }
 
-
-
 export default function Board() {
+  
+  //* STICKY TITLE ***********************/
+  //? Source: https://stackoverflow.com/questions/16302483/event-to-detect-when-positionsticky-is-triggered
+  // TODO NEED TO WATCH THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! https://www.youtube.com/watch?v=2IbRtjez6ag&list=PLVUo-YVOlgZPvqvoi3ilabhV5OX-c7ezh&index=4&t=184s&ab_channel=WebDevSimplified 
+  // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
+  const [isSticky, setIsSticky] = useState(false)
+  const stickyColumnName = useRef<any>()
+  // const boardColumnsContainer = useRef<HTMLDivElement>()
+  const [yIntersection, setYIntersection] = useState(-1)
+  
+  // mount 
+  useEffect(()=>{
+    const cachedRef = stickyColumnName.current,
+          observer = new IntersectionObserver(
+            ([e]) => setIsSticky(e.intersectionRatio < 1),
+            {
+              threshold: 1,
+            }
+          )
+
+    observer.observe(cachedRef)
+    
+    // unmount
+    return function(){
+      observer.unobserve(cachedRef)
+    }
+  }, [])
+  //**************************************/
 
   const [board, setBoard] = useState<any>(cardDummyData);
 
@@ -159,12 +223,8 @@ export default function Board() {
     setBoard(listCopy)
   }
 
-
   return (
     <div className='board-container'>
-
-
-
       <nav className='board-navbar'>
         <ul>
           <li><div className='board-list-toggle-button'><span>List</span></div></li>
@@ -185,49 +245,64 @@ export default function Board() {
 
 
       <DragDropContext onDragEnd={onDragEnd}>
-        <div className='board-columns'>
-          {Object.keys(board).map((list, index) => (
-            <div className="board-column" key={index}>
-              <div className="kaban-board-heading">{list}</div>
-              <Droppable droppableId={list}>
-                {(provided: any, snapshot: any) => (
-                  <div 
-                    className='board-droppable-area'
-                    ref={provided.innerRef}
-                    {...provided.droppableProps}
-                  >
-                    {board[list].map((card: any, index: any) => (
-                      <Draggable key={card.id} draggableId={card.id} index={index}>
-                        {(provided: any) => (
-                          <div
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}
-
-                            className="kaban-card-container"
-                          >
-                              <KanbanBoardCard
-                                id={card.id}
-                                listId={card.listId}
-                                priority={card.priority}
-                                project={card.project}
-                                title={card.title}
-                                tags={card.tags}
-                                deadline={card.deadline}
-                              />
-                          </div>
-                        )}
-                      </Draggable>
-                    ))}
-                    {provided.placeholder}
-                  </div>
-                )}
-              </Droppable>
-
+        <div className='board-columns'> {/* If you want the react-dnd-board to be scrollable, the container outside the Droppables need to be scrollable. */}
+            
+          <div className="board-area">
+            <div className={"kaban-board-headings-container" + (isSticky ? " isSticky" : "")} ref={stickyColumnName}>
+              {Object.keys(board).map((list, index) => (
+                <div className="kaban-board-heading" >
+                  {list}
+                  <div className="add-card-button">+</div>
+                </div>
+              ))}
             </div>
 
-            
-          ))}
+            <div className="board-columns-wrapper">
+              {Object.keys(board).map((list, index) => (
+                <div className="board-column" key={index}>
+                  <Droppable droppableId={list}>
+                    {(provided: any, snapshot: any) => (
+                      <div 
+                        className='board-droppable-area'
+                        ref={provided.innerRef}
+                        {...provided.droppableProps}
+                      >
+                        {board[list].map((card: any, index: any) => (
+                          <Draggable key={card.id} draggableId={card.id} index={index}>
+                            {(provided: any) => (
+                              <div
+                                ref={provided.innerRef}
+                                {...provided.draggableProps}
+                                {...provided.dragHandleProps}
+
+                                className="kaban-card-container"
+                              >
+                                  <KanbanBoardCard
+                                    id={card.id}
+                                    listId={card.listId}
+                                    priority={card.priority}
+                                    project={card.project}
+                                    title={card.title}
+                                    tags={card.tags}
+                                    deadline={card.deadline}
+                                  />
+                              </div>
+                            )}
+                          </Draggable>
+                        ))}
+                        {provided.placeholder}
+                      </div>
+                    )}
+                  </Droppable>
+
+                </div>
+
+                
+              ))}
+            </div>
+          </div>
+          
+
         </div>
       </DragDropContext>
     </div>
