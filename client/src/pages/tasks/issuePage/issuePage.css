@@ -1,0 +1,47 @@
+.issue-page-container {
+    display: flex;
+    /* display: grid; */
+    flex-direction: column;
+    width: 100%;
+
+    margin: 12px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 4px 18px;
+    border-radius: 6px;
+
+}
+
+.issue-navbar {
+    padding: 12px;
+}
+
+/* .close-issue-page-button {
+
+} */
+
+.issue-content {
+    background-color: aqua;
+    width: 100%;
+    display: flex;
+    flex: 1;
+    border-radius: 0 0 6px 6px;
+    border: 1px solid black;
+}
+
+
+.issue-main {
+    border-right: 1px solid black;
+    flex: 2.6;
+}
+
+/* Taken from velocity */
+.issue-main-clamp {
+    width: calc(100% - 120px);
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 860px;
+    height: 100%;
+}
+
+.issue-details {
+    flex: 1;
+}

@@ -3,7 +3,7 @@ import './board.css'
 import _ from 'lodash';
 
 import styled from 'styled-components';
-import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
+import KanbanBoardCard from './kanbanBoardCard/KanbanBoardCard';
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 
@@ -308,3 +308,4 @@ export default function Board() {
     </div>
   )
 }
+
