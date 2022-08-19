@@ -4,25 +4,29 @@ import _ from 'lodash';
 
 import styled from 'styled-components';
 
+interface SidebarWidthProp {
+  sidebarWidth: number;
+}
 
-
-const SidebarContainer = styled.div.attrs((props: any) => ({
+const SidebarContainer = styled.div.attrs((props: SidebarWidthProp) => ({
   style: {
     minWidth: props.sidebarWidth,
   }
 }))` 
-  
+  min-width: ${(props: SidebarWidthProp) => props.sidebarWidth}; // https://github.com/DefinitelyTyped/DefinitelyTyped/issues/42691
 `
-const SidebarBorderSpan = styled.span`
+
+// https://stackoverflow.com/questions/61760696/no-overload-matches-this-call-when-usign-styled-components
+const SidebarBorderSpan = styled.span<{isResizeActive: boolean}>`
   background-color: ${(props: any) => props.isResizeActive ? "rgb(38, 132, 255)" : ""};
 `
+
 
 
 export default function Sidebar() {
   
 
   const originalSidebarWidth = useRef<number>(240) // Need to make this based on local storage
-
 
   const [sidebarWidth, setSidebarWidth] = useState<number>(originalSidebarWidth.current);
 
@@ -58,6 +62,8 @@ export default function Sidebar() {
     window.addEventListener('mouseup', resizeMouseUpHandler);
   
     document.body.style.cursor = "ew-resize"; // ! BUG: Theres a bug here where the style of the cursor changes to default when you move outside the sidebar
+    //! I think this bug is fixed now
+
     isResizeActive.current = true; 
     setIsResizeActiveState(prev => !prev) // This is to change the background color of the border when the user lets go of resizing the sidebar
   }
@@ -98,14 +104,15 @@ export default function Sidebar() {
     <SidebarContainer 
       className='sidebar-container'
       sidebarWidth={sidebarWidth}
-      isResizeActive={isResizeActive.current}
+      // isResizeActive={isResizeActive.current}
     >
-      <div className="sidebar-content">sdfhgdfs</div>
+      <div className="sidebar-content">Put Sidebar Children Here</div>
 
       <div className="sidebar-resize-container" onMouseDown={resizeMouseDownHandler}>
         <div className="sidebar-border"></div>
         <button className='sidebar-resize-button' >
           <SidebarBorderSpan isResizeActive={isResizeActive.current}></SidebarBorderSpan>  
+          <span></span>
         </button>
       </div>
     </SidebarContainer>

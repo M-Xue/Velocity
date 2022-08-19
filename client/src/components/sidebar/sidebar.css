@@ -1,8 +1,8 @@
 .sidebar-container {
     height: calc(100vh - 56px);
     position: relative;
-    min-width: 240px;
-    max-width: 50%;
+    /* min-width: 240px; */
+    /* max-width: 50%; */
     /* margin-right: 30px; */
 }
 
