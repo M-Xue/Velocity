@@ -3,7 +3,10 @@ import {keymap} from "prosemirror-keymap"
 import {baseKeymap} from "prosemirror-commands";
 
 const prosemirrorPlugins = [
-    history(),
+    history({
+        depth: 100,
+        newGroupDelay: 1
+    }),
     keymap({"Mod-z": undo, "Mod-y": redo}),
     keymap(baseKeymap)
 ]

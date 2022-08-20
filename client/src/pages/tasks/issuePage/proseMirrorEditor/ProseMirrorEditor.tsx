@@ -15,23 +15,44 @@ import mySchema from './proseMirrorConfig/schema'
 import prosemirrorPlugins from './proseMirrorConfig/plugins'
 
 
+
 export default function ProseMirrorEditor() {
+  // useEffect(() => {
+  //   const view = new EditorView(
+  //     document.querySelector("#editor"), 
+  //     {
+  //       state: EditorState.create({
+  //         // doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
+  //         schema,
+  //         // plugins: exampleSetup({schema: mySchema})
+  //         plugins: prosemirrorPlugins
+  //       }),
+  //       handleDoubleClick() { console.log("Double click!") }
+  //     }
+  //   )
+  //   console.log(view.props);
+  //   console.log(schema);
+
+  //   return () => {
+  //     view.destroy();
+  //   }
+  // })
+
   useEffect(() => {
     const editor = new EditorView(
-      document.querySelector("#editor"), 
+      document.querySelector("#editor"),
       {
         state: EditorState.create({
-          doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
+          schema,
           plugins: exampleSetup({schema: mySchema})
         })
       }
     )
-    console.log(mySchema);
   })
 
-  
-  
-  
+
+
+
   return (
     <>
       <div id='editor'></div>
