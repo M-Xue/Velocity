@@ -3,51 +3,26 @@ import './proseMirrorEditor.css'
 
 import {EditorState} from "prosemirror-state"
 import {EditorView} from "prosemirror-view"
-
-
 import {Schema, DOMParser} from "prosemirror-model"
-
-import {schema} from "prosemirror-schema-basic"
 import {addListNodes} from "prosemirror-schema-list"
-import {exampleSetup} from "prosemirror-example-setup"
 
-import mySchema from './proseMirrorConfig/schema'
-import prosemirrorPlugins from './proseMirrorConfig/plugins'
-
-
+import { schema } from './exampleConfig/schema-basic'
+import { exampleSetup } from './exampleConfig'
 
 export default function ProseMirrorEditor() {
-  // useEffect(() => {
-  //   const view = new EditorView(
-  //     document.querySelector("#editor"), 
-  //     {
-  //       state: EditorState.create({
-  //         // doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")),
-  //         schema,
-  //         // plugins: exampleSetup({schema: mySchema})
-  //         plugins: prosemirrorPlugins
-  //       }),
-  //       handleDoubleClick() { console.log("Double click!") }
-  //     }
-  //   )
-  //   console.log(view.props);
-  //   console.log(schema);
-
-  //   return () => {
-  //     view.destroy();
-  //   }
-  // })
-
+  
   useEffect(() => {
-    const editor = new EditorView(
-      document.querySelector("#editor"),
-      {
-        state: EditorState.create({
-          schema,
-          plugins: exampleSetup({schema: mySchema})
-        })
-      }
-    )
+    const mySchema = new Schema({
+      nodes: addListNodes(schema.spec.nodes, "paragraph block*", "block"),
+      marks: schema.spec.marks
+    })
+
+    new EditorView(document.querySelector("#editor"), {
+      state: EditorState.create({
+        doc: DOMParser.fromSchema(mySchema).parse(document.querySelector("#content")!), // https://stackoverflow.com/questions/63520680/argument-of-type-htmlelement-null-is-not-assignable-to-parameter-of-type-el
+        plugins: exampleSetup({schema: mySchema})
+      })
+    })
   })
 
 

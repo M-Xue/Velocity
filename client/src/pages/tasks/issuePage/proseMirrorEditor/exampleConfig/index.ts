@@ -4,10 +4,8 @@ import {baseKeymap} from "prosemirror-commands"
 import {Plugin} from "prosemirror-state"
 import {dropCursor} from "prosemirror-dropcursor"
 import {gapCursor} from "prosemirror-gapcursor"
-// import {menuBar, MenuItem} from "prosemirror-menu"
 import {Schema} from "prosemirror-model"
 
-// import {buildMenuItems} from "./menu"
 import {buildKeymap} from "./keymap"
 import {buildInputRules} from "./inputrules"
 
@@ -48,9 +46,6 @@ export function exampleSetup(options: {
 
   /// Set to false to disable the history plugin.
   history?: boolean
-
-  /// Can be used to override the menu content.
-//   menuContent?: MenuItem[][]
 }) {
   let plugins = [
     buildInputRules(options.schema),
@@ -59,9 +54,6 @@ export function exampleSetup(options: {
     dropCursor(),
     gapCursor()
   ]
-//   if (options.menuBar !== false)
-//     plugins.push(menuBar({floating: options.floatingMenu !== false,
-//                           content: options.menuContent || buildMenuItems(options.schema).fullMenu}))
   if (options.history !== false)
     plugins.push(history())
 
