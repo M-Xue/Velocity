@@ -35,9 +35,15 @@ export default function ProseMirrorEditor() {
   })
 
   // Needs 
-  // Headings, bold, emphasised, ordered lists, unordered lists, check boxes, code boxes, link, images, horizonatal rules, tables, strike through, highlighting, superscript, subscript, emojis
+  // nodes: headings, ordered lists, unordered lists, check boxes, images, horizonatal rules, tables, emojis, code boxes, link, blockquote
+  // marks: bold, emphasised, strike through, highlighting, superscript, subscript
+
+  // Finished
+  // nodes: 
+  // marks: 
+
   // Tool bar when highlighting
-  // footnotes, heading ids
+  // extra stuff for extended notes page: footnotes, heading ids
 
 
   return (

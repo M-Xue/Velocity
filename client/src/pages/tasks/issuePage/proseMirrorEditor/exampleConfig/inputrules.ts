@@ -16,7 +16,7 @@ export function orderedListRule(nodeType: NodeType) {
 }
 
 /// Given a list node type, returns an input rule that turns a bullet
-/// (dash, plush, or asterisk) at the start of a textblock into a
+/// (dash, plus, or asterisk) at the start of a textblock into a
 /// bullet list.
 export function bulletListRule(nodeType: NodeType) {
     return wrappingInputRule(/^\s*([-+*])\s$/, nodeType)
@@ -40,7 +40,15 @@ export function headingRule(nodeType: NodeType, maxLevel: number) {
 /// A set of input rules for creating the basic block quotes, lists,
 /// code blocks, and heading.
 export function buildInputRules(schema: Schema) {
-    let rules = smartQuotes.concat(ellipsis, emDash), type
+    let rules = smartQuotes.concat(ellipsis, emDash), type;
+    // rules.push(blockQuoteRule(schema.nodes.blockquote));
+    // rules.push(orderedListRule(schema.nodes.ordered_list));
+    // rules.push(bulletListRule(schema.nodes.bullet_list));
+    // rules.push(codeBlockRule(schema.nodes.code_block));
+    // rules.push(headingRule(schema.nodes.heading, 6));
+
+    console.log(smartQuotes);
+
     if (type = schema.nodes.blockquote) rules.push(blockQuoteRule(type))
     if (type = schema.nodes.ordered_list) rules.push(orderedListRule(type))
     if (type = schema.nodes.bullet_list) rules.push(bulletListRule(type))

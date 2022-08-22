@@ -1,6 +1,9 @@
-import {MarkSpec, DOMOutputSpec} from "prosemirror-model"
+import {MarkSpec} from "prosemirror-model"
 
-const emDOM: DOMOutputSpec = ["em", 0], strongDOM: DOMOutputSpec = ["strong", 0], codeDOM: DOMOutputSpec = ["code", 0]
+// Explaination: Marks are used to add extra styling or other information to inline content. A schema must declare all mark types it allows in its schema. Mark types are objects much like node types, used to tag mark objects and provide additional information about them.
+// The current object below in a simple object (not a mark) that holds many MarkSpecs (https://prosemirror.net/docs/ref/#model.MarkSpec)
+// The toDOM() method specifies what kind of HTML tag should be wrapped arround any content with a particular mark.
+// The parseDOM of the MarkSpec checks all coming content (dragged or pasted) for certain characteristics (e.g., their html tags or their CSS styling) and applies the toDOM() method.
 
 /// [Specs](#model.MarkSpec) for the marks in the schema.
 export const marks = {
@@ -22,8 +25,8 @@ export const marks = {
   /// An emphasis mark. Rendered as an `<em>` element. Has parse rules
   /// that also match `<i>` and `font-style: italic`.
   em: {
-    parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style=italic"}],
-    toDOM() { return emDOM }
+    parseDOM: [{tag: "i"}, {tag: "em"}, {style: "font-style", getAttrs: value => value == "italic" && null}],
+    toDOM: () => ['em']
   } as MarkSpec,
 
   /// A strong mark. Rendered as `<strong>`, parse rules also match
@@ -34,13 +37,65 @@ export const marks = {
                // pasted content will be inexplicably wrapped in `<b>`
                // tags with a font-weight normal.
                {tag: "b", getAttrs: (node: HTMLElement) => node.style.fontWeight != "normal" && null},
-               {style: "font-weight", getAttrs: (value: string) => /^(bold(er)?|[5-9]\d{2,})$/.test(value) && null}],
-    toDOM() { return strongDOM }
+               {style: "font-weight", getAttrs: (value: string) => /^(bold(er)?|[5-9]\d{2,})$/.test(value as string) && null}],
+    toDOM: () => ['strong']
   } as MarkSpec,
 
   /// Code font mark. Represented as a `<code>` element.
   code: {
     parseDOM: [{tag: "code"}],
-    toDOM() { return codeDOM }
+    toDOM: () => ['code']
+  } as MarkSpec,
+
+  // https://codesandbox.io/s/t3num?file=/src/Editor/marks.js:51-765
+  subscript: {
+    excludes: 'superscript',
+    parseDOM: [{ tag: 'sub' }, { style: 'vertical-align=sub' }],
+    toDOM: () => ['sub']
+  } as MarkSpec,
+
+  superscript: {
+    excludes: 'subscript',
+    parseDOM: [{ tag: 'sup' }, { style: 'vertical-align=super' }],
+    toDOM: () => ['sup']
+  } as MarkSpec,
+
+  strikethrough: {
+    parseDOM: [
+      { tag: 'strike' },
+      { style: 'text-decoration=line-through' },
+      { style: 'text-decoration-line=line-through' }
+    ],
+    toDOM: () => [
+      'span',
+      {
+        style: 'text-decoration-line:line-through'
+      }
+    ]
+  } as MarkSpec,
+
+  underline: {
+    parseDOM: [{ tag: 'u' }, { style: 'text-decoration=underline' }],
+    toDOM: () => [
+      'span',
+      {
+        style: 'text-decoration:underline'
+      }
+    ]
+  } as MarkSpec,
+
+  highlight: {
+    parseDOM: [
+        { tag: 'mark' }, 
+        // { style: 'text-decoration=underline' }
+    ],
+    toDOM: () => [
+      'span',
+      {
+        style: 'background-colour:#fcf8e3'
+      }
+    ]
   } as MarkSpec
 }
+
+export default marks;
