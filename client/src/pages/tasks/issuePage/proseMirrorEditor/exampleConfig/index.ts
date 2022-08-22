@@ -9,7 +9,7 @@ import {Schema} from "prosemirror-model"
 import {buildKeymap} from "./keymap"
 import {buildInputRules} from "./inputrules"
 
-export {buildKeymap, buildInputRules}
+export {buildKeymap, buildInputRules} //! This line is not actually needed. These two functions are only used in this file.
 
 /// Create an array of plugins pre-configured for the given schema.
 /// The resulting array will include the following plugins:
@@ -30,9 +30,6 @@ export {buildKeymap, buildInputRules}
 /// 
 ///  * The gap cursor plugin
 /// 
-///  * A custom plugin that adds a `menuContent` prop for the
-///    prosemirror-menu wrapper, and a CSS class that enables the
-///    additional styling defined in `style/style.css` in this package
 ///
 /// Probably only useful for quickly setting up a passable
 /// editor—you'll need more control over your settings in most
@@ -48,8 +45,8 @@ export function exampleSetup(options: {
   history?: boolean
 }) {
   let plugins = [
-    buildInputRules(options.schema),
-    keymap(buildKeymap(options.schema, options.mapKeys)),
+    buildInputRules(options.schema), // returns the return value of inputRules() which returns a plugin
+    keymap(buildKeymap(options.schema, options.mapKeys)), // buildKeymap() returns Commands. keymap() returns a plugin
     keymap(baseKeymap),
     dropCursor(),
     gapCursor()
@@ -59,7 +56,8 @@ export function exampleSetup(options: {
 
   return plugins.concat(new Plugin({
     props: {
-      attributes: {class: "ProseMirror-example-setup-style"}
+      attributes: {class: "ProseMirror-example-setup-style"},
+      // handleDoubleClick() {console.log(window.view.state.toJSON())} // Can add props here or directly into the editor view
     }
   }))
 }
