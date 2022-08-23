@@ -18,16 +18,41 @@ export default function ProseMirrorEditor() {
         }),
         dispatchTransaction(transaction) {
           let newState = window.view.state.apply(transaction)
+
+          // let f = "testContent.json";
+          // let txtFile = new File("testContent.json");
+          // // txtFile.writeln("test");
+          // // txtFile.close();
+
+
           console.log(newState.toJSON());
           window.view.updateState(newState)
         }
       },
 
     )
-    
-    return () => {
-      console.log(window.view.state.toJSON());
-    }
+
+
+
+    // let JSON = fetch("./testContent.json")
+    //   .then
+    // console.log(JSON);
+    // window.view = new EditorView(
+    //   document.querySelector("#editor"), 
+    //   {
+    //     state: EditorState.fromJSON(
+    //       {
+    //         schema: listSchema,
+    //         plugins: prosemirrorPlugins
+    //       },
+    //       JSON
+    //     )
+    //   }
+    // )
+
+    // return () => {
+    //   console.log(window.view.state.toJSON());
+    // }
   })
 
   return (
