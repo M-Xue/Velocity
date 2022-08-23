@@ -7,8 +7,6 @@ import {DOMParser} from "prosemirror-model"
 import listSchema from './proseMirrorConfig/schema'
 import prosemirrorPlugins from './proseMirrorConfig/plugins'
 
-
-
 export default function ProseMirrorEditor() {
   useEffect(() => {
     window.view = new EditorView(

@@ -1,4 +1,4 @@
-import {undo, redo, history} from "prosemirror-history"
+import {history} from "prosemirror-history"
 import {keymap} from "prosemirror-keymap"
 import {baseKeymap} from "prosemirror-commands";
 import {dropCursor} from "prosemirror-dropcursor"
@@ -13,12 +13,12 @@ const prosemirrorPlugins = [
         depth: 100,
         newGroupDelay: 1
     }),
-    keymap({"Mod-z": undo, "Mod-y": redo}),
+    keymap(buildKeymap(listSchema)),
     keymap(baseKeymap),
     dropCursor(),
     gapCursor(),
     buildInputRules(listSchema),
-    keymap(buildKeymap(listSchema))
 ]
+
 
 export default prosemirrorPlugins;

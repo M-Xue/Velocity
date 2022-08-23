@@ -64,3 +64,19 @@ export function exampleSetup(options: {
     }
   }))
 }
+
+
+// let plugins = [
+//   buildInputRules(listSchema), // returns the return value of inputRules() which returns a plugin
+//   keymap(buildKeymap(listSchema)), // buildKeymap() returns Commands. keymap() returns a plugin
+//   keymap(baseKeymap),
+//   dropCursor(),
+//   gapCursor()
+// ]
+// plugins.push(history())
+// plugins.concat(new Plugin({
+//   props: {
+//       attributes: {class: "ProseMirror-example-setup-style"},
+//       // handleDoubleClick() {console.log(window.view.state.toJSON())} // Can add props here or directly into the editor view
+//   }
+// }))
