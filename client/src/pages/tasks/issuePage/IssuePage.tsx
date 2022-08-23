@@ -20,21 +20,20 @@ export default function IssuePage() {
         <div className="issue-main">
           <div className="issue-main-clamp">
 
-            <ProseMirrorEditor/>
+            
 
 
-            {/* <form action="">
+            <form action="">
               <textarea name="title" className='issue-content-title'></textarea>
-              <div className="issue-content-description" contentEditable="true">asfd</div>
+              <ProseMirrorEditor/>
             </form>
 
-            <div className="issue-content-description">description</div>
 
 
 
 
             <div className="issue-content-history">history</div>
-            <div className="issue-content-comments">comments</div> */}
+            <div className="issue-content-comments">comments</div>
 
 
           </div>

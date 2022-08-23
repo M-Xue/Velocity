@@ -1,6 +1,4 @@
 import {NodeSpec} from "prosemirror-model"
-import {addListNodes} from "prosemirror-schema-list"
-
 
 // Guide on NodeSpecs here in the Content Expression section: https://prosemirror.net/docs/guide/#schema
 // Documentation: https://prosemirror.net/docs/ref/#model.NodeSpec
@@ -54,6 +52,7 @@ export const nodes = {
                {tag: "h4", attrs: {level: 4}},
                {tag: "h5", attrs: {level: 5}},
                {tag: "h6", attrs: {level: 6}}],
+    // toDOM(node) { return ["div", {style: "width=30px;background-colour=black"}, "h" + node.attrs.level, 0] }
     toDOM(node) { return ["h" + node.attrs.level, 0] }
   } as NodeSpec,
 
@@ -110,8 +109,6 @@ export const nodes = {
     toDOM() { return ["br"] }
   } as NodeSpec,
 
-
-
   ordered_list: {
     content: "list_item+",
     group: "block",
@@ -139,6 +136,21 @@ export const nodes = {
     defining: true,
     parseDOM: [{tag: "li"}],
     toDOM() { return ["li", 0] }
+  } as NodeSpec,
+
+
+
+  check_list: {
+    content: "list_item+",
+    group: "block",
+    toDOM(node) { return ["ul", {"data-tight": node.attrs.tight ? "true" : null}, 0] }
+  } as NodeSpec,
+
+  check_list_item: {
+    content: "paragraph block*",
+    defining: true,
+    draggable: true,
+    toDOM() { return ["div", {class: "prosemirror-checklist-item"}, "li", 0] }
   } as NodeSpec,
 }
 

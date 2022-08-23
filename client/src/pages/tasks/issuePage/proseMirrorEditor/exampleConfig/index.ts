@@ -34,6 +34,9 @@ export {buildKeymap, buildInputRules} //! This line is not actually needed. Thes
 /// Probably only useful for quickly setting up a passable
 /// editor—you'll need more control over your settings in most
 /// real-world situations.
+
+
+// This function returns a plugin
 export function exampleSetup(options: {
   /// The schema to generate key bindings and menu items for.
   schema: Schema

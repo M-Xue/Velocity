@@ -47,7 +47,7 @@ export function buildInputRules(schema: Schema) {
     // rules.push(codeBlockRule(schema.nodes.code_block));
     // rules.push(headingRule(schema.nodes.heading, 6));
 
-    console.log(smartQuotes);
+    // console.log(smartQuotes);
 
     if (type = schema.nodes.blockquote) rules.push(blockQuoteRule(type))
     if (type = schema.nodes.ordered_list) rules.push(orderedListRule(type))
