@@ -4,6 +4,7 @@ import styled from 'styled-components';
 import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
 
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
+import KanbanBoardHeading from '../kanbanBoardHeading/KanbanBoardHeading';
 const cardDummyData = {
 	"Backlog": [
 		{
@@ -171,73 +172,32 @@ const addToList = (list: any, index: any, element: any) => {
 
 
 export default function KanbanBoard() {
+  const [board, setBoard] = useState<any>(cardDummyData);
 
-    //* STICKY TITLE ***********************/
-  //? Source: https://stackoverflow.com/questions/16302483/event-to-detect-when-positionsticky-is-triggered
-  // TODO NEED TO WATCH THIS !!!!!!!!!!!!!!!!!!!!!!!!!!!!!! https://www.youtube.com/watch?v=2IbRtjez6ag&list=PLVUo-YVOlgZPvqvoi3ilabhV5OX-c7ezh&index=4&t=184s&ab_channel=WebDevSimplified 
-  // TODO !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-  const [isSticky, setIsSticky] = useState(false)
-  const stickyColumnName = useRef<any>()
-  // const boardColumnsContainer = useRef<HTMLDivElement>()
-  const [yIntersection, setYIntersection] = useState(-1)
-  
-  // mount 
-  useEffect(()=>{
-    const cachedRef = stickyColumnName.current,
-          observer = new IntersectionObserver(
-            ([e]) => setIsSticky(e.intersectionRatio < 1),
-            {
-              threshold: 1,
-            }
-          )
-
-    observer.observe(cachedRef)
-    
-    // unmount
-    return function(){
-      observer.unobserve(cachedRef)
-    }
-  }, [])
-  //**************************************/
-
-    const [board, setBoard] = useState<any>(cardDummyData);
-
-    
-    const onDragEnd = (result: any) => {  
-      // console.log(result)
-      if (!result.destination) {  
-          return;  
-      }  
-      const listCopy = { ...board }  
-    
-      const sourceList = listCopy[result.source.droppableId] // result.source.droppableId is the key of the key value pair of the list in the elements state object that the draggable was taken from
-      const [removedElement, newSourceList] = removeFromList(sourceList, result.source.index)  
-      listCopy[result.source.droppableId] = newSourceList  
-    
-      const destinationList = listCopy[result.destination.droppableId]  
-      // removedElement.listId = result.destination.droppableId; //* CHANGED THIS SO THAT THE ELEMENTS LIST ID IS DYNAMICALLY UPDATED. 
-      listCopy[result.destination.droppableId] = addToList(destinationList, result.destination.index, removedElement)
-      // console.log(destinationList);
-      // console.log(removedElement);
-      setBoard(listCopy)
-    }
+	const onDragEnd = (result: any) => {  
+		// console.log(result)
+		if (!result.destination) {  
+				return;  
+		}  
+		const listCopy = { ...board }  
+	
+		const sourceList = listCopy[result.source.droppableId] // result.source.droppableId is the key of the key value pair of the list in the elements state object that the draggable was taken from
+		const [removedElement, newSourceList] = removeFromList(sourceList, result.source.index)  
+		listCopy[result.source.droppableId] = newSourceList  
+	
+		const destinationList = listCopy[result.destination.droppableId]  
+		removedElement.listId = result.destination.droppableId; //* CHANGED THIS SO THAT THE ELEMENTS LIST ID IS DYNAMICALLY UPDATED. 
+		listCopy[result.destination.droppableId] = addToList(destinationList, result.destination.index, removedElement)
+		// console.log(destinationList);
+		// console.log(removedElement);
+		setBoard(listCopy)
+	}
   return (
     <>
+			<KanbanBoardHeading/>
       <DragDropContext onDragEnd={onDragEnd}>
         <div className='board-columns'> {/* If you want the react-dnd-board to be scrollable, the container outside the Droppables need to be scrollable. */} 
           <div className="board-area">
-            <div className={"kaban-board-headings-container" + (isSticky ? " isSticky" : "")} ref={stickyColumnName}>
-              {Object.keys(board).map((list, index) => (
-                <div className="kaban-board-heading" key={index}>
-                  {list}
-                  <div className="add-card-button">
-                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-plus-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
-
-                  </div>
-                </div>
-              ))}
-            </div>
-
             <div className="board-columns-wrapper">
               {Object.keys(board).map((list, index) => (
                 <div className="board-column">

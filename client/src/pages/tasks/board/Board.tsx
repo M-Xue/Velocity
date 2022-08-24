@@ -4,6 +4,7 @@ import _ from 'lodash';
 
 
 import KanbanBoard from './kanbanBoard/KanbanBoard';
+import KanbanBoardHeading from './kanbanBoardHeading/KanbanBoardHeading';
 
 
 export default function Board() {
@@ -31,9 +32,7 @@ export default function Board() {
           </div></li>
         </ul>
       </nav>
-
       <KanbanBoard/>
-      
     </div>
   )
 }
