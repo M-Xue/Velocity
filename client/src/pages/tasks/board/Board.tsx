@@ -9,10 +9,6 @@ import KanbanBoardHeading from './kanbanBoardHeading/KanbanBoardHeading';
 
 export default function Board() {
   
-  
-
-
-
   return (
     <div className='board-container'>
       <nav className='board-navbar'>
