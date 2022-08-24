@@ -151,7 +151,7 @@ const cardDummyData = {
     tags: ['UI', "Backend"],
     deadline: '15 Jun 2022'
   }],
-  "In Pogress": [],
+  "In Progress": [],
   "In Review": [],
   "Done": [],
   "Cancelled": []
@@ -205,7 +205,7 @@ export default function Board() {
 
 
   const onDragEnd = (result: any) => {  
-    console.log(result)
+    // console.log(result)
     if (!result.destination) {  
         return;  
     }  
@@ -250,23 +250,28 @@ export default function Board() {
           <div className="board-area">
             <div className={"kaban-board-headings-container" + (isSticky ? " isSticky" : "")} ref={stickyColumnName}>
               {Object.keys(board).map((list, index) => (
-                <div className="kaban-board-heading" >
+                <div className="kaban-board-heading" key={index}>
                   {list}
-                  <div className="add-card-button">+</div>
+                  <div className="add-card-button">
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-plus-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
+
+                  </div>
                 </div>
               ))}
             </div>
 
             <div className="board-columns-wrapper">
               {Object.keys(board).map((list, index) => (
-                <div className="board-column" key={index}>
-                  <Droppable droppableId={list}>
+                <div className="board-column" key={index}> {/*  */}
+                  {/*  */}
+                  <Droppable droppableId={list} key={index}> 
                     {(provided: any, snapshot: any) => (
                       <div 
                         className='board-droppable-area'
                         ref={provided.innerRef}
                         {...provided.droppableProps}
-                      >
+                        key={index} 
+                      > {/*  */}
                         {board[list].map((card: any, index: any) => (
                           <Draggable key={card.id} draggableId={card.id} index={index}>
                             {(provided: any) => (

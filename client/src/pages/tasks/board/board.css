@@ -56,6 +56,8 @@
 
 /** Kaban Board Styling ************************************************************************************/
 
+
+/** column labels */
 .kaban-board-headings-container {
     display: flex;
     padding-top: 1px;
@@ -64,17 +66,20 @@
     top: -1px;
     /* top: 0; */
     background-color: white;
+
+    justify-content: space-around;
 }
 .kaban-board-heading {
-    /* margin-bottom: 20px; */
     padding-bottom: 20px;
     padding-top: 1px;
-    width: 100%;
+    width: 250px;
     display: flex;
     justify-content: space-between;
-    /* position: sticky; */
-    /* top: -1px; */
-    /* background-color: white;  */
+    padding-left: 5px;
+    padding-right: 3px;
+
+    font-weight: 600;
+    align-items: center;
 }
 
 .isSticky::after {
@@ -86,6 +91,31 @@
     height: 4px;
     background: rgba(0, 0, 0, 0) linear-gradient(rgba(9, 30, 66, 0.13) 0px, rgba(9, 30, 66, 0.13) 1px, rgba(9, 30, 66, 0.08) 1px, rgba(9, 30, 66, 0) 4px) repeat scroll 0% 0%;
 }
+
+.add-card-button {
+    display: flex;
+    padding: 3px;
+    border-radius: 3px;
+
+    transition: 0.1s ease-out 0s;
+}
+
+.add-card-button:hover {
+    background-color: #F3F4F6;
+}
+
+.add-card-button:active {
+    background-color: #EBEBEB;
+    
+}
+
+.feather {
+    /* color: #eeeeee; */
+}
+
+
+
+/** actual columns */
 
 .board-columns {
     /* ***** */
@@ -106,7 +136,7 @@
 
 /* The purpose of this wrapper is so that we have a container that contains all columns but is also a child of another container that has overflow-x and overflow-y set to scroll. This lets us scroll through kanban board when we have too many cards/columns to fit the available space for the board.  */
 .board-columns-wrapper {
-    min-height: calc(100% - 43px); 
+    min-height: calc(100% - 50px); 
     height: fit-content;
     display: flex;
 }
@@ -117,11 +147,14 @@
     max-width: 250px;
 
     margin: 0 8px;
-
+    
     display: flex;
     flex-direction: column;
     align-items: center;
-    background-color: antiquewhite;
+    background-color: hwb(210 98% 1%);
+    border-radius: 8px;
+    padding: 5px 3px 0 3px;
+
 
 
     /* ***** */
