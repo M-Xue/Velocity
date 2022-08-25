@@ -1,0 +1,15 @@
+.modal-backdrop {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    /* background-color: #000000be; */
+    background-color: rgba(144, 149, 157, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 999;
+
+    /* pointer-events: all; */
+}

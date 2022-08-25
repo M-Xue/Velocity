@@ -1,0 +1,36 @@
+.kanban-modal-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+
+    display: flex;
+    /* align-items: center; */
+    justify-content: center;
+    z-index: 998;
+
+    /* pointer-events: all; */
+
+    background-color: rgba(144, 149, 157, 0.4);
+
+}
+
+.kanban-modal {
+    background: linear-gradient(136.61deg, rgb(255, 255, 255) 13.72%, rgb(255, 255, 255) 74.3%);
+    border-radius: 8px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 16px 70px;
+    color: rgb(60, 65, 73);
+    
+    position: fixed;
+    top: 13vh;
+
+    /* background-color: black; */
+
+    min-width: 700px;
+    /* min-height: 200px; */
+    min-height: 233px;
+
+    z-index: 999;
+
+}

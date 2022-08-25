@@ -38,7 +38,7 @@ export default function IssuePage() {
       <div className='issue-content'>
         <div className="issue-main">
           <div className="issue-main-clamp">
-
+            
             <form action="">
               <textarea name="title" className='issue-content-title'></textarea>
               <ProseMirrorEditor/>

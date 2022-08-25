@@ -5,6 +5,8 @@ import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
 
 import { DragDropContext, Droppable, Draggable, DropResult, DroppableProvided, DraggableProvided } from "react-beautiful-dnd";
 import KanbanBoardHeading from '../kanbanBoardHeading/KanbanBoardHeading';
+import KanbanCardModalBackdrop from '../kanbanCardModal/KanbanCardModalBackdrop';
+import KanbanCardModal from '../kanbanCardModal/KanbanCardModal';
 
 const cardDummyData = {
 	'backlog': [{
@@ -139,6 +141,10 @@ export default function KanbanBoard() {
 					</DragDropContext>
 				</div>
 			</div>
+
+			{/* <KanbanCardModalBackdrop /> */}
+			<KanbanCardModal/>
+
     	</>
   	)
 }
