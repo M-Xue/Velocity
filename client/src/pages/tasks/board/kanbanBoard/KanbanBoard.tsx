@@ -6,16 +6,6 @@ import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
 import { DragDropContext, Droppable, Draggable } from "react-beautiful-dnd";
 import KanbanBoardHeading from '../kanbanBoardHeading/KanbanBoardHeading';
 
-interface cardData {
-	id: String,
-	listId: String,
-	priority: String,
-	project: String,
-	title: String,
-	tags: String[],
-	deadline: String
-}
-
 interface columnData {
 	
 }
@@ -170,6 +160,18 @@ const cardDummyData = {
 	"Cancelled": []
 }
 
+interface cardData {
+	id: String,
+	listId: String,
+	priority: String,
+	project: String,
+	title: String,
+	tags: String[],
+	deadline: String
+}
+
+
+
 // Removes and element from a given list from the given index and returns both the new list and the removed element
 const removeFromList = (list: cardData[], index: number): (cardData | cardData[])[] => {  
 	const result = Array.from(list);  
@@ -188,6 +190,8 @@ export default function KanbanBoard() {
   const [board, setBoard] = useState<any>(cardDummyData);
 
 	const onDragEnd = (result: any) => {  
+		console.log(board)
+		console.log(result);
 		if (!result.destination) {  
 				return;  
 		}  
@@ -204,12 +208,118 @@ export default function KanbanBoard() {
 	}
   return (
     <>
-      <DragDropContext onDragEnd={onDragEnd}>
-				<div className='board-columns'> {/* If you want the react-dnd-board to be scrollable, the container outside the Droppables need to be scrollable. */}
-					<div className="board-area">
+			<div className='board-columns'> {/* If you want the react-dnd-board to be scrollable, the container outside the Droppables need to be scrollable. */}
+				<div className="board-area">
+					<KanbanBoardHeading/>
 
-						<KanbanBoardHeading/>
 
+
+					<DragDropContext onDragEnd={onDragEnd}>
+{/* https://github.com/atlassian/react-beautiful-dnd/issues/1734
+	potential solution
+*/}
+
+						<div className="board-columns-wrapper">
+							{Object.keys(board).map((list, index) => (
+								<div className="board-column">
+									<Droppable droppableId={list}> 
+										{(provided: any, snapshot: any) => (
+											<div 
+												className='board-droppable-area'
+												ref={provided.innerRef}
+												{...provided.droppableProps} 
+											>
+
+
+								
+												{board[list].map((card: any, index: any) => (
+													<Draggable key={card.id} draggableId={card.id} index={index}>
+														{(provided: any) => (
+															<div
+																ref={provided.innerRef}
+																{...provided.draggableProps}
+																{...provided.dragHandleProps}
+
+																className="kaban-card-container"
+															>
+																<KanbanBoardCard
+																	id={card.id}
+																	listId={card.listId}
+																	priority={card.priority}
+																	project={card.project}
+																	title={card.title}
+																	tags={card.tags}
+																	deadline={card.deadline}
+																/>
+															</div>
+														)}
+													</Draggable>
+												))}
+
+
+
+
+												{provided.placeholder}
+											</div>
+										)}
+									</Droppable>
+								</div>
+							))}
+						</div>
+					</DragDropContext>
+
+
+
+
+				</div>
+			</div>
+    </>
+  )
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+{/* <DragDropContext onDragEnd={onDragEnd}>
 						<div className="board-columns-wrapper">
 							{Object.keys(board).map((list, index) => (
 								<div className="board-column">
@@ -250,10 +360,4 @@ export default function KanbanBoard() {
 								</div>
 							))}
 						</div>
-
-					</div>
-				</div>
-      </DragDropContext>
-    </>
-  )
-}
+					</DragDropContext> */}
