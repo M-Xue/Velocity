@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import ProseMirrorForm from '../proseMirrorForm/ProseMirrorForm'
 import './issuePage.css'
 import ProseMirrorEditor from './proseMirrorEditor/ProseMirrorEditor'
 
@@ -39,10 +40,12 @@ export default function IssuePage() {
         <div className="issue-main">
           <div className="issue-main-clamp">
             
-            <form action="">
+            {/* <form action="">
               <textarea name="title" className='issue-content-title'></textarea>
               <ProseMirrorEditor/>
-            </form>
+            </form> */}
+
+            <ProseMirrorForm/>
 
             <div className="issue-content-history">history</div>
             <div className="issue-content-comments">comments</div>
