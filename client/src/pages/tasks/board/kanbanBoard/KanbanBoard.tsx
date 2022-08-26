@@ -5,8 +5,7 @@ import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
 
 import { DragDropContext, Droppable, Draggable, DropResult, DroppableProvided, DraggableProvided } from "react-beautiful-dnd";
 import KanbanBoardHeading from '../kanbanBoardHeading/KanbanBoardHeading';
-import KanbanCardModalBackdrop from '../kanbanCardModal/KanbanCardModalBackdrop';
-import KanbanCardModal from '../kanbanCardModal/KanbanCardModalForm';
+import KanbanCardModal from '../kanbanCardModal/KanbanCardModal';
 import { AnimatePresence } from 'framer-motion';
 
 const cardDummyData = {
@@ -71,11 +70,13 @@ export default function KanbanBoard() {
 	const handleOpenModal = (e: React.MouseEvent<HTMLButtonElement>, columnId: string)  => {
 		e.preventDefault();
 		setIsModalActive(true);
+		console.log("Modal opened")
 	}
 
 	const handleCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		setIsModalActive(false);
+		console.log("Modal closed");
 	}
 
 
@@ -153,16 +154,14 @@ export default function KanbanBoard() {
 					</DragDropContext>
 				</div>
 			</div>
+
 			<AnimatePresence
 				initial={false}
 				exitBeforeEnter={true}
 				onExitComplete={()=>null}
 			>
-				{isModalActive && <KanbanCardModalBackdrop isModalActive={isModalActive} handleCloseModal={handleCloseModal}/>}
-				{/* {isModalActive && <KanbanCardModal isModalActive={isModalActive} handleCloseModal={handleCloseModal}/>} */}
-			
+				{isModalActive && <KanbanCardModal isModalActive={isModalActive} handleCloseModal={handleCloseModal}/>}
 			</AnimatePresence>
-
     	</>
   	)
 }
