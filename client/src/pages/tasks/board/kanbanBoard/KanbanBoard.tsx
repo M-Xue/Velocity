@@ -6,7 +6,7 @@ import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
 import { DragDropContext, Droppable, Draggable, DropResult, DroppableProvided, DraggableProvided } from "react-beautiful-dnd";
 import KanbanBoardHeading from '../kanbanBoardHeading/KanbanBoardHeading';
 import KanbanCardModalBackdrop from '../kanbanCardModal/KanbanCardModalBackdrop';
-import KanbanCardModal from '../kanbanCardModal/KanbanCardModal';
+import KanbanCardModal from '../kanbanCardModal/KanbanCardModalForm';
 import { AnimatePresence } from 'framer-motion';
 
 const cardDummyData = {

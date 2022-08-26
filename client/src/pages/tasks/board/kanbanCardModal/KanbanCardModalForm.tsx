@@ -8,7 +8,7 @@ interface Props {
 }
 
 
-export default function KanbanCardModal({isModalActive, handleCloseModal}: Props) {
+export default function KanbanCardModalForm({isModalActive, handleCloseModal}: Props) {
   return (
     <div className="kanban-modal-container">
       <div className="kanban-modal">
