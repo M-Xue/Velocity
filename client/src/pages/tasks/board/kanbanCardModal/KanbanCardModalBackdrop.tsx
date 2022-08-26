@@ -1,13 +1,14 @@
 import React, { MouseEventHandler } from 'react'
 import './kanbanCardModalBackdrop.css'
 import { motion, AnimatePresence } from 'framer-motion'
+import KanbanCardModal from './KanbanCardModal'
 
 interface Props {
-  isActive: boolean,
+  isModalActive: boolean,
   handleCloseModal: any
 }
 
-export default function KanbanCardModalBackdrop({isActive, handleCloseModal}: Props) {
+export default function KanbanCardModalBackdrop({isModalActive, handleCloseModal}: Props) {
   return (
     <>
       <motion.div
@@ -15,11 +16,15 @@ export default function KanbanCardModalBackdrop({isActive, handleCloseModal}: Pr
         initial={{opacity: 0}}
         animate={{opacity: 1}}
         exit={{opacity: 0}}
-        transition={{ duration: 0.075}}
+        transition={{ duration: 0.1}}
         onClick={handleCloseModal}
       >
 
+
       </motion.div>
+
+      <KanbanCardModal isModalActive={isModalActive} handleCloseModal={handleCloseModal}/>
+
 
       
     </>

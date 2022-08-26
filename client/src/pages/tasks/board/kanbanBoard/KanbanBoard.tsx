@@ -158,9 +158,10 @@ export default function KanbanBoard() {
 				exitBeforeEnter={true}
 				onExitComplete={()=>null}
 			>
-				{isModalActive && <KanbanCardModalBackdrop isActive={isModalActive} handleCloseModal={handleCloseModal}/>}
+				{isModalActive && <KanbanCardModalBackdrop isModalActive={isModalActive} handleCloseModal={handleCloseModal}/>}
+				{/* {isModalActive && <KanbanCardModal isModalActive={isModalActive} handleCloseModal={handleCloseModal}/>} */}
+			
 			</AnimatePresence>
-			{/* <KanbanCardModal/> */}
 
     	</>
   	)
