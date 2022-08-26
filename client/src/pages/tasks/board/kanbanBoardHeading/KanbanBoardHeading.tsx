@@ -1,18 +1,24 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { MouseEventHandler, useEffect, useRef, useState } from 'react'
 import './kanbanBoardHeading.css'
 
 const boardTitles = ["Backlog", "To Do", "In Progress", "In Review", "Done", "Cancelled"]
 
-export default function KanbanBoardHeading() {
+interface Props {
+  handleOpenModal: any
+}
+
+export default function KanbanBoardHeading({handleOpenModal}: Props) {
   return (
     <div className={"kaban-board-headings-container"}>
       {boardTitles.map((list, index) => (
+
         <div className="kaban-board-heading" key={index}>
           {list}
-          <button className="add-card-button" type='button'>
+          <button className="add-card-button" type='button' onClick={handleOpenModal}>
             <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="feather feather-plus-square"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><line x1="12" y1="8" x2="12" y2="16"></line><line x1="8" y1="12" x2="16" y2="12"></line></svg>
           </button>
         </div>
+        
       ))}
     </div> 
   )

@@ -7,6 +7,7 @@ import { DragDropContext, Droppable, Draggable, DropResult, DroppableProvided, D
 import KanbanBoardHeading from '../kanbanBoardHeading/KanbanBoardHeading';
 import KanbanCardModalBackdrop from '../kanbanCardModal/KanbanCardModalBackdrop';
 import KanbanCardModal from '../kanbanCardModal/KanbanCardModal';
+import { AnimatePresence } from 'framer-motion';
 
 const cardDummyData = {
 	'backlog': [{
@@ -65,7 +66,18 @@ const addToList = (list: cardData[], index: number, element: cardData) => {
 export default function KanbanBoard() {
   	const [board, setBoard] = useState<kanbanBoard>(cardDummyData);
 
-	// console.log("rendered");
+	const [isModalActive, setIsModalActive] = useState<boolean>(false);
+
+	const handleOpenModal = (e: React.MouseEvent<HTMLButtonElement>, columnId: string)  => {
+		e.preventDefault();
+		setIsModalActive(true);
+	}
+
+	const handleCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
+		e.preventDefault();
+		setIsModalActive(false);
+	}
+
 
 	const onDragEnd = (result: DropResult) => {
 		// console.log(result);
@@ -91,7 +103,7 @@ export default function KanbanBoard() {
     	<>
 			<div className='board-columns'> {/* If you want the react-dnd-board to be scrollable, the container outside the Droppables need to be scrollable. */}
 				<div className="board-area">
-					<KanbanBoardHeading/>
+					<KanbanBoardHeading handleOpenModal={handleOpenModal}/>
 
 					<DragDropContext onDragEnd={onDragEnd}>
 						<div className="board-columns-wrapper">
@@ -141,9 +153,14 @@ export default function KanbanBoard() {
 					</DragDropContext>
 				</div>
 			</div>
-
-			{/* <KanbanCardModalBackdrop /> */}
-			<KanbanCardModal/>
+			<AnimatePresence
+				initial={false}
+				exitBeforeEnter={true}
+				onExitComplete={()=>null}
+			>
+				{isModalActive && <KanbanCardModalBackdrop isActive={isModalActive} handleCloseModal={handleCloseModal}/>}
+			</AnimatePresence>
+			{/* <KanbanCardModal/> */}
 
     	</>
   	)
