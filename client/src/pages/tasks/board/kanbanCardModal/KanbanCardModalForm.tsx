@@ -1,5 +1,5 @@
 import React from 'react'
-import ProseMirrorForm from '../../proseMirrorForm/ProseMirrorForm'
+import ProseMirrorForm from '../../../../components/proseMirrorForm/ProseMirrorForm'
 import './kanbanCardModalForm.css'
 import { motion } from 'framer-motion'
 
@@ -15,15 +15,17 @@ export default function KanbanCardModalForm({isModalActive, handleCloseModal}: P
       className="kanban-modal"
 
       initial={{opacity: 0, scale: 0}}
-      animate={{opacity: 1, scale: 1}}
+      animate={{opacity: 1, scale: [null,1.01,1]}}
       exit={{opacity: 0, scale: 0}}
-      transition={{ duration: 0.1}}
+      transition={{ duration: 0.3}}
     >
       <button 
         type='button'
         onClick={handleCloseModal}
       >X</button>
-      {/* <ProseMirrorForm/> */}
+      
+      <ProseMirrorForm/>
+
     </motion.div>
   )
 }

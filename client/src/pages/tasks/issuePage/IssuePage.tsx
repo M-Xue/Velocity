@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import ProseMirrorForm from '../proseMirrorForm/ProseMirrorForm'
+import ProseMirrorForm from '../../../components/proseMirrorForm/ProseMirrorForm'
 import './issuePage.css'
 
 interface issueMainContent {
