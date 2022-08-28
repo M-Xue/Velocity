@@ -26,6 +26,10 @@ export default function KanbanCardModalForm({isModalActive, handleCloseModal}: P
       
       <ProseMirrorForm/>
 
+      <div className="kanban-modal-form-footer">
+        <button className='kanban-modal-form-save-button' type='button'>Save</button>
+      </div>
+
     </motion.div>
   )
 }
