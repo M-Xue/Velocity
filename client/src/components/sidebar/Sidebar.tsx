@@ -112,7 +112,6 @@ export default function Sidebar() {
         <div className="sidebar-border"></div>
         <button className='sidebar-resize-button' >
           <SidebarBorderSpan isResizeActive={isResizeActive.current}></SidebarBorderSpan>  
-          <span></span>
         </button>
       </div>
     </SidebarContainer>
