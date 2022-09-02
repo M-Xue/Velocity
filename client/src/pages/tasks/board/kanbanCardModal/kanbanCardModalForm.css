@@ -10,13 +10,47 @@
     /* background-color: black; */
 
     min-width: 700px;
+    max-width: 700px;
     /* min-height: 200px; */
     min-height: 233px;
 
     z-index: 999;
 
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 12px;
+
 }
 
-.kanban-modal-form-footer {
-    padding: 12px;
+
+.kanban-modal-topbar {
+    display: flex;
+    justify-content: space-between;
+    margin-left: 14px;
+}
+
+
+
+.kanban-modal-close-button {
+    display: flex;
+    padding: 3px;
+    border-radius: 3px;
+    transition: 0.1s ease-out 0s;
+    border: none;
+    background-color: #FFF;
+}
+
+.kanban-modal-close-button:hover {
+    background-color: #F3F4F6;
+}
+
+.kanban-modal-close-button:active {
+    background-color: #EBEBEB;
+}
+
+
+.kanban-modal-footer {
+    margin-left: 14px;
+    
 }

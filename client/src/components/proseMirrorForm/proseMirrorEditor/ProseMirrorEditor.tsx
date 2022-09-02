@@ -65,44 +65,6 @@ export default function ProseMirrorEditor() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   // Needs 
   // nodes: check boxes, tables, emojis, code boxes, link, blockquote
   // marks: highlighting, superscript, subscript
@@ -117,6 +79,44 @@ export default function ProseMirrorEditor() {
 
   // Tool bar when highlighting
   // extra stuff for extended notes page: footnotes, heading ids
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

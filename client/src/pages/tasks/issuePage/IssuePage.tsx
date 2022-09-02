@@ -41,8 +41,8 @@ export default function IssuePage() {
             
             <ProseMirrorForm/>
 
-            <div className="issue-content-history">history</div>
-            <div className="issue-content-comments">comments</div>
+            {/* <div className="issue-content-history">history</div>
+            <div className="issue-content-comments">comments</div> */}
 
           </div>
         </div>
