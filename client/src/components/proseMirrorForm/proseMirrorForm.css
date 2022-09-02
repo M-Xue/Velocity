@@ -1,0 +1,36 @@
+.issue-content-title {
+    margin-top: 10px;
+    margin-bottom: 8px;
+    width: 100%;
+    padding: 6px 14px;
+
+    font-size: 22px;
+    font-weight: 500;
+    font-family: 'Inter', sans-serif;
+
+    line-height: 1.6em;
+
+    resize: none;
+    word-break: break-word;
+    overflow: hidden;
+    user-select: text;
+    cursor: text;
+
+    border: none;
+    outline: none;
+
+
+    color: rgb(40, 42, 48);
+    background: transparent;
+    height: 47px;
+
+    border-radius: 4px;
+    border: 2px solid rgb(255, 255, 255);
+
+    transition: border-color 0.15s ease-in-out 0s, box-shadow 0.15s ease-in-out 0s;
+}
+
+.issue-content-title:focus {
+    border-color: #0091F7;
+    box-shadow: rgba(0, 0, 0, 0.03) 0px 2px 5px;
+}

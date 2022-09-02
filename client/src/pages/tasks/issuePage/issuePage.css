@@ -19,17 +19,18 @@
 } */
 
 .issue-content {
-    background-color: aqua;
+    /* background-color: aqua; */
+    /* border: 1px solid black; */
+
     width: 100%;
     display: flex;
     flex: 1;
     border-radius: 0 0 6px 6px;
-    border: 1px solid black;
 }
 
 
 .issue-main {
-    border-right: 1px solid black;
+    /* border-right: 1px solid black; */
     flex: 2.6;
 }
 
