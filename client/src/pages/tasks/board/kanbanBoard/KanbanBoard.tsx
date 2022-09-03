@@ -77,6 +77,9 @@ export default function KanbanBoard() {
 	const handleSaveModal = (e: React.MouseEvent<HTMLButtonElement>, title: string) => {
 		e.preventDefault();
 
+		// console.log(activeModalColumnId);
+		// console.log([...board[activeModalColumnId!]]);
+
 		const newColumn: cardData[] = [...board[activeModalColumnId!]];
 		const newCardData: cardData = {
 			id: uuidv4(),
@@ -84,7 +87,17 @@ export default function KanbanBoard() {
 			title: title
 		}
 		newColumn.push(newCardData);
-		const newBoard: kanbanBoard = {...board, activeModalColumnId: newColumn}
+		console.log(newColumn);
+
+		const newBoard: kanbanBoard = {...board};
+		newBoard[activeModalColumnId!] = newColumn;
+		// console.log(board);
+		console.log(newBoard);
+
+
+
+
+
 		setBoard(newBoard);
 		setActiveModalColumnId(null);
 		setIsModalActive(false);
@@ -165,7 +178,6 @@ export default function KanbanBoard() {
 
 			<AnimatePresence
 				initial={false}
-				// exitBeforeEnter={true}
 				mode='wait'
 				onExitComplete={()=>null}
 			>
@@ -174,6 +186,17 @@ export default function KanbanBoard() {
     	</>
   	)
 }
+
+
+
+
+
+
+
+
+
+
+
 
 
 
