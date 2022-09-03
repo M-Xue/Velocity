@@ -63,45 +63,31 @@ export default function KanbanBoard() {
 		e.preventDefault();
 		setActiveModalColumnId(columnId);
 		setIsModalActive(true);
-		console.log(columnId);
-		console.log("Modal opened")
 	}
 
 	const handleCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
 		setActiveModalColumnId(null);
 		setIsModalActive(false);
-		console.log("Modal closed");
 	}
 
-	const handleSaveModal = (e: React.MouseEvent<HTMLButtonElement>, title: string) => {
+	const handleSaveModal = (e: React.MouseEvent<HTMLButtonElement>, currentContent: any) => {
 		e.preventDefault();
 
-		// console.log(activeModalColumnId);
-		// console.log([...board[activeModalColumnId!]]);
-
-		const newColumn: cardData[] = [...board[activeModalColumnId!]];
 		const newCardData: cardData = {
 			id: uuidv4(),
 			listId: activeModalColumnId!, 
-			title: title
+			title: currentContent.title
 		}
-		newColumn.push(newCardData);
-		console.log(newColumn);
 
+		const newColumn: cardData[] = [...board[activeModalColumnId!]];
+		newColumn.push(newCardData);
 		const newBoard: kanbanBoard = {...board};
 		newBoard[activeModalColumnId!] = newColumn;
-		// console.log(board);
-		console.log(newBoard);
-
-
-
-
 
 		setBoard(newBoard);
 		setActiveModalColumnId(null);
 		setIsModalActive(false);
-		console.log("Modal saved");
 	}
 
 
@@ -201,6 +187,12 @@ export default function KanbanBoard() {
 
 
 
+
+
+
+
+
+
 // activeColumnId={activeModalColumnId}
 
 
@@ -232,58 +224,6 @@ export default function KanbanBoard() {
 
 
 
-
-
-
-
-
-
-
-
-
-
-{/* <DragDropContext onDragEnd={onDragEnd}>
-						<div className="board-columns-wrapper">
-							{Object.keys(board).map((list, index) => (
-								<div className="board-column">
-									<Droppable droppableId={list}> 
-										{(provided: any, snapshot: any) => (
-											<div 
-												className='board-droppable-area'
-												ref={provided.innerRef}
-												{...provided.droppableProps} 
-											>
-												{board[list].map((card: any, index: any) => (
-													<Draggable key={card.id} draggableId={card.id} index={index}>
-														{(provided: any) => (
-															<div
-																ref={provided.innerRef}
-																{...provided.draggableProps}
-																{...provided.dragHandleProps}
-
-																className="kaban-card-container"
-															>
-																<KanbanBoardCard
-																	id={card.id}
-																	listId={card.listId}
-																	priority={card.priority}
-																	project={card.project}
-																	title={card.title}
-																	tags={card.tags}
-																	deadline={card.deadline}
-																/>
-															</div>
-														)}
-													</Draggable>
-												))}
-												{provided.placeholder}
-											</div>
-										)}
-									</Droppable>
-								</div>
-							))}
-						</div>
-					</DragDropContext> */}
 
 
 

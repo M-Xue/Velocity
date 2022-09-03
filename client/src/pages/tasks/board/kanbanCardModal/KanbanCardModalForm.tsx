@@ -1,10 +1,11 @@
-import React from 'react'
+import React, { useRef } from 'react'
 import ProseMirrorForm from '../../../../components/proseMirrorForm/ProseMirrorForm'
 import './kanbanCardModalForm.css'
 import { motion } from 'framer-motion'
 import { v4 as uuidv4 } from 'uuid';
 
 import {cardData} from '../kanbanBoard/KanbanBoard'
+import {EditorState} from "prosemirror-state"
 
 interface Props {
   isModalActive: boolean,
@@ -12,9 +13,16 @@ interface Props {
   handleSaveModal: any
 }
 
+interface issueContent {
+  title: string,
+  content: EditorState | null
+}
 
 export default function KanbanCardModalForm({isModalActive, handleCloseModal, handleSaveModal}: Props) {
-
+  const currentContent = useRef<issueContent>({
+    title: "",
+    content: null
+  })
 
   return (
     <motion.div 
@@ -41,10 +49,10 @@ export default function KanbanCardModalForm({isModalActive, handleCloseModal, ha
 
 
       
-      <ProseMirrorForm/>
+      <ProseMirrorForm currentState={currentContent}/>
 
       <div className="kanban-modal-footer">
-        <button className='kanban-modal-form-save-button' type='button' onClick={e=>handleSaveModal(e, 'test')}>Save</button>
+        <button className='kanban-modal-form-save-button' type='button' onClick={e=>handleSaveModal(e, currentContent.current)}>Save</button>
       </div>
 
     </motion.div>

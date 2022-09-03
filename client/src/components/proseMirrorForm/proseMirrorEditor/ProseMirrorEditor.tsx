@@ -7,8 +7,11 @@ import {DOMParser} from "prosemirror-model"
 import listSchema from './proseMirrorConfig/schema'
 import prosemirrorPlugins from './proseMirrorConfig/plugins'
 
+interface Props {
+  currentState?: any
+}
 
-export default function ProseMirrorEditor() {
+export default function ProseMirrorEditor({currentState}: Props) {
 
   useLayoutEffect(() => {
     const fetchJSONData = async () => {
@@ -35,9 +38,11 @@ export default function ProseMirrorEditor() {
         {
           state: initialState,
           dispatchTransaction(transaction) {
-            let newState = window.view.state.apply(transaction)
+            let newState: EditorState = window.view.state.apply(transaction)
 
             // TODO Update the editor description here
+
+            currentState.current.content = newState.toJSON();
 
             console.log(newState.toJSON());
             window.view.updateState(newState)
