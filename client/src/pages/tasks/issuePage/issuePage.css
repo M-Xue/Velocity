@@ -18,6 +18,24 @@
 
 } */
 
+.close-issue-page-button {
+    display: flex;
+    padding: 3px;
+    border-radius: 3px;
+    transition: 0.1s ease-out 0s;
+    border: none;
+    background-color: #FFF;
+}
+
+.close-issue-page-button:hover {
+    background-color: #F3F4F6;
+}
+
+.close-issue-page-button:active {
+    background-color: #EBEBEB;
+}
+
+
 .issue-content {
     /* background-color: aqua; */
     /* border: 1px solid black; */

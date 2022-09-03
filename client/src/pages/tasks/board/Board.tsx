@@ -4,7 +4,7 @@ import _ from 'lodash';
 
 
 import KanbanBoard from './kanbanBoard/KanbanBoard';
-import KanbanBoardHeading from './kanbanBoardHeading/KanbanBoardHeading';
+import KanbanBoardHeading from './kanbanBoard/kanbanBoardHeading/KanbanBoardHeading';
 
 
 export default function Board() {

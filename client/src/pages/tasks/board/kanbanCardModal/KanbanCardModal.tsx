@@ -5,10 +5,14 @@ import KanbanCardModalForm from './KanbanCardModalForm'
 
 interface Props {
   isModalActive: boolean,
-  handleCloseModal: any
+  handleCloseModal: any,
+  handleSaveModal: any
 }
 
-export default function KanbanCardModal({isModalActive, handleCloseModal}: Props) {
+export default function KanbanCardModal({isModalActive, handleCloseModal, handleSaveModal}: Props) {
+
+
+
   return (
     <>
       <div className="kanban-modal-container" >
@@ -23,7 +27,7 @@ export default function KanbanCardModal({isModalActive, handleCloseModal}: Props
         >
         </motion.div>
 
-        <KanbanCardModalForm isModalActive={isModalActive} handleCloseModal={handleCloseModal}/> 
+        <KanbanCardModalForm isModalActive={isModalActive} handleCloseModal={handleCloseModal} handleSaveModal={handleSaveModal}/> 
       </div>
       
 

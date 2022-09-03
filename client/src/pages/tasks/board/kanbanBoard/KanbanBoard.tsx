@@ -4,46 +4,37 @@ import styled from 'styled-components';
 import KanbanBoardCard from '../kanbanBoardCard/KanbanBoardCard';
 
 import { DragDropContext, Droppable, Draggable, DropResult, DroppableProvided, DraggableProvided } from "react-beautiful-dnd";
-import KanbanBoardHeading from '../kanbanBoardHeading/KanbanBoardHeading';
+import KanbanBoardHeading from './kanbanBoardHeading/KanbanBoardHeading';
 import KanbanCardModal from '../kanbanCardModal/KanbanCardModal';
 import { AnimatePresence } from 'framer-motion';
+import { v4 as uuidv4 } from 'uuid';
+
 
 const cardDummyData = {
-	'backlog': [{
+	'Backlog': [{
 		id: '1',
-		listId: 'backlog',
-		priority: 'High',
-		project: 'Velocity',
+		listId: 'Backlog',
 		title: 'Test1',
-		tags: ['UI', "Backend"],
-		deadline: '15 Jun 2022'
 	}],
-	'toDo': [{
+	'To Do': [{
 		id: '2',
-		listId: 'backlog',
-		priority: 'High',
-		project: 'Velocity',
+		listId: 'To Do',
 		title: 'Test2',
-		tags: ['UI', "Backend"],
-		deadline: '15 Jun 2022'
 	}],
-	'inProgress': [],
-	'inReview': [],
-	'done': [],
-	'cancelled': []
+	'In Progress': [],
+	'In Review': [],
+	'Done': [],
+	'Cancelled': []
 }
-interface kanbanBoard {
+
+export interface kanbanBoard {
 	[key: string]: cardData[],
 }
 
-interface cardData {
+export interface cardData {
 	id: string,
 	listId: string,
-	priority: string,
-	project: string,
 	title: string,
-	tags: string[],
-	deadline: string
 }
 
 // Removes and element from a given list from the given index and returns both the new list and the removed element
@@ -66,17 +57,38 @@ export default function KanbanBoard() {
   	const [board, setBoard] = useState<kanbanBoard>(cardDummyData);
 
 	const [isModalActive, setIsModalActive] = useState<boolean>(false);
+	const [activeModalColumnId, setActiveModalColumnId] = useState<string | null>(null)
 
 	const handleOpenModal = (e: React.MouseEvent<HTMLButtonElement>, columnId: string)  => {
 		e.preventDefault();
+		setActiveModalColumnId(columnId);
 		setIsModalActive(true);
+		console.log(columnId);
 		console.log("Modal opened")
 	}
 
 	const handleCloseModal = (e: React.MouseEvent<HTMLButtonElement>) => {
 		e.preventDefault();
+		setActiveModalColumnId(null);
 		setIsModalActive(false);
 		console.log("Modal closed");
+	}
+
+	const handleSaveModal = (e: React.MouseEvent<HTMLButtonElement>, title: string) => {
+		e.preventDefault();
+
+		const newColumn: cardData[] = [...board[activeModalColumnId!]];
+		const newCardData: cardData = {
+			id: uuidv4(),
+			listId: activeModalColumnId!, 
+			title: title
+		}
+		newColumn.push(newCardData);
+		const newBoard: kanbanBoard = {...board, activeModalColumnId: newColumn}
+		setBoard(newBoard);
+		setActiveModalColumnId(null);
+		setIsModalActive(false);
+		console.log("Modal saved");
 	}
 
 
@@ -132,11 +144,7 @@ export default function KanbanBoard() {
 																<KanbanBoardCard
 																	id={card.id}
 																	listId={card.listId}
-																	priority={card.priority}
-																	project={card.project}
 																	title={card.title}
-																	tags={card.tags}
-																	deadline={card.deadline}
 																/>
 															</div>
 														)}
@@ -157,10 +165,11 @@ export default function KanbanBoard() {
 
 			<AnimatePresence
 				initial={false}
-				exitBeforeEnter={true}
+				// exitBeforeEnter={true}
+				mode='wait'
 				onExitComplete={()=>null}
 			>
-				{isModalActive && <KanbanCardModal isModalActive={isModalActive} handleCloseModal={handleCloseModal}/>}
+				{isModalActive && <KanbanCardModal isModalActive={isModalActive} handleCloseModal={handleCloseModal} handleSaveModal={handleSaveModal}/>}
 			</AnimatePresence>
     	</>
   	)
@@ -169,7 +178,7 @@ export default function KanbanBoard() {
 
 
 
-
+// activeColumnId={activeModalColumnId}
 
 
 
