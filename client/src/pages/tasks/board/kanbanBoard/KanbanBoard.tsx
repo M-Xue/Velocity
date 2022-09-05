@@ -10,7 +10,7 @@ import { AnimatePresence } from 'framer-motion';
 import { v4 as uuidv4 } from 'uuid';
 
 
-const cardDummyData = {
+const initialBoardState = {
 	'Backlog': [{
 		id: '1',
 		listId: 'Backlog',
@@ -54,7 +54,7 @@ const addToList = (list: cardData[], index: number, element: cardData) => {
 
 
 export default function KanbanBoard() {
-  	const [board, setBoard] = useState<kanbanBoard>(cardDummyData);
+  	const [board, setBoard] = useState<kanbanBoard>(initialBoardState);
 
 	const [isModalActive, setIsModalActive] = useState<boolean>(false);
 	const [activeModalColumnId, setActiveModalColumnId] = useState<string | null>(null)
@@ -167,7 +167,7 @@ export default function KanbanBoard() {
 				mode='wait'
 				onExitComplete={()=>null}
 			>
-				{isModalActive && <KanbanCardModal isModalActive={isModalActive} handleCloseModal={handleCloseModal} handleSaveModal={handleSaveModal}/>}
+				{isModalActive && <KanbanCardModal handleCloseModal={handleCloseModal} handleSaveModal={handleSaveModal}/>}
 			</AnimatePresence>
     	</>
   	)
@@ -185,175 +185,8 @@ export default function KanbanBoard() {
 
 
 
-
-
-
-
-
-
-
-
-// activeColumnId={activeModalColumnId}
-
-
-
-
 {/* https://github.com/atlassian/react-beautiful-dnd/issues/1734
 	potential solution
 */}
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-					// {
-					// 	id: '10',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test2',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '3',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test3',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '4',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test4',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '5',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test5',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '6',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test6',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '7',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test7',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '8',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test8',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '9',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test9',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '11',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test11',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '12',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test12',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// }
-					// ,{
-					// 	id: '13',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test13',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '14',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test14',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '15',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test15',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '16',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test16',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// },{
-					// 	id: '17',
-					// 	listId: 'backlog',
-					// 	priority: 'High',
-					// 	project: 'Velocity',
-					// 	title: 'Test17',
-					// 	tags: ['UI', "Backend"],
-					// 	deadline: '15 Jun 2022'
-					// }

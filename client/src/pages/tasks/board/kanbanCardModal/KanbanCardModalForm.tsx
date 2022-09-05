@@ -8,7 +8,6 @@ import {cardData} from '../kanbanBoard/KanbanBoard'
 import {EditorState} from "prosemirror-state"
 
 interface Props {
-  isModalActive: boolean,
   handleCloseModal: any,
   handleSaveModal: any
 }
@@ -18,7 +17,7 @@ interface issueContent {
   content: EditorState | null
 }
 
-export default function KanbanCardModalForm({isModalActive, handleCloseModal, handleSaveModal}: Props) {
+export default function KanbanCardModalForm({handleCloseModal, handleSaveModal}: Props) {
   const currentContent = useRef<issueContent>({
     title: "",
     content: null
