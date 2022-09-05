@@ -15,7 +15,7 @@ export default function Tasks() {
 
   return (
     <div className='task-page-container'>
-      <Sidebar />
+      {/* <Sidebar /> */}
       <Board />
       {/* <IssuePage/> */}
     </div>

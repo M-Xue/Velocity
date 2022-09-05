@@ -15,10 +15,12 @@ export default function ProseMirrorEditor({currentState}: Props) {
 
   useLayoutEffect(() => {
     const fetchJSONData = async () => {
-      const response = await fetch("./testContent.json");
+      // const response = await fetch("./testContentNonExistant.json");
+      // const response = await fetch("./testContent.json");
+      const response = await fetch("./testPlaceHolderContent.json");
       const json = await response.json();
       let initialState;
-      if (json !== null && json !== undefined) {
+      if (json !== null || json !== undefined) {
         initialState = EditorState.fromJSON(
           {
             schema: listSchema,
@@ -41,7 +43,6 @@ export default function ProseMirrorEditor({currentState}: Props) {
             let newState: EditorState = window.view.state.apply(transaction)
 
             // TODO Update the editor description here
-
             currentState.current.content = newState.toJSON();
 
             console.log(newState.toJSON());

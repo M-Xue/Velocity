@@ -19,6 +19,9 @@
     display: flex;
     align-items: center;
     padding-left: 30px;
+
+    justify-content: center; 
+    /* ^^ Delete this part when u add more elements to the navbar */
 }
 
 .board-navbar ul {

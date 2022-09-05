@@ -74,6 +74,16 @@ export default function KanbanBoard() {
 	const handleSaveModal = (e: React.MouseEvent<HTMLButtonElement>, currentContent: any) => {
 		e.preventDefault();
 
+		console.log(currentContent);
+
+		if (currentContent.title === "") {
+			console.log("Needs title");
+			return;
+		} else if (currentContent.content === null) {
+			console.log("Needs content");
+			return;
+		}
+
 		const newCardData: cardData = {
 			id: uuidv4(),
 			listId: activeModalColumnId!, 
